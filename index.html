@@ -1,0 +1,771 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Итоги сентября 2026</title>
+<meta name="description" content="Что выкатили по проектам: описание доработок и скрины с прода — десктоп, мобилка, приложение.">
+<style>@font-face{font-family:"Manrope";src:url("fonts/Manrope-Medium.ttf") format("truetype");font-weight:500;font-style:normal;font-display:swap}@font-face{font-family:"Manrope";src:url("fonts/Manrope-SemiBold.ttf") format("truetype");font-weight:600;font-style:normal;font-display:swap}@font-face{font-family:"Manrope";src:url("fonts/Manrope-Bold.ttf") format("truetype");font-weight:700;font-style:normal;font-display:swap}@font-face{font-family:"Manrope";src:url("fonts/Manrope-ExtraBold.ttf") format("truetype");font-weight:800;font-style:normal;font-display:swap}@font-face{font-family:"Inter";src:url("fonts/Inter-Regular.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:"Inter";src:url("fonts/Inter-Medium.ttf") format("truetype");font-weight:500;font-style:normal;font-display:swap}@font-face{font-family:"Inter";src:url("fonts/Inter-SemiBold.ttf") format("truetype");font-weight:600;font-style:normal;font-display:swap}@font-face{font-family:"Inter";src:url("fonts/Inter-Bold.ttf") format("truetype");font-weight:700;font-style:normal;font-display:swap}
+:root{
+  --paper:#ffffff; --bg:#f5f5f7; --mist:#f5f5f7; --sky:#e8f2fd; --sky-line:#c7dcf6;
+  --ink:#1d1d1f; --ink-2:#424245; --muted:#6e6e73;
+  --line:#d2d2d7; --line-soft:#e6e6eb;
+  --blue:#0071e3; --blue-text:#0066cc; --indigo:#5856d6;
+  --ok:#0f9d58; --ok-bg:#e6f6ee; --warn:#b26a00; --warn-bg:#fdf1de; --gray:#6e6e73; --gray-bg:#eeeef1;
+  --grad:linear-gradient(135deg,#0071e3,#5856d6);
+  --shadow:0 1px 2px rgba(29,29,31,.05),0 12px 32px -18px rgba(29,29,31,.28);
+  --f-display:"Manrope","Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  --f-text:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  --pad:clamp(16px,4vw,40px); --maxw:1180px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#16171b; --bg:#0e0f12; --mist:#1c1e23; --sky:#15263b; --sky-line:#23405f;
+  --ink:#f2f3f6; --ink-2:#c6cad2; --muted:#9298a3;
+  --line:#2c3038; --line-soft:#23262d;
+  --blue:#5c9dff; --blue-text:#8ab4ff; --indigo:#9b99f7;
+  --ok:#49d18a; --ok-bg:#12291e; --warn:#f0b429; --warn-bg:#2c2312; --gray:#9298a3; --gray-bg:#23262d;
+  --grad:linear-gradient(135deg,#2a7cf0,#7d7bea);
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 18px 40px -22px rgba(0,0,0,.8);
+}}
+:root[data-theme="dark"]{
+  --paper:#16171b; --bg:#0e0f12; --mist:#1c1e23; --sky:#15263b; --sky-line:#23405f;
+  --ink:#f2f3f6; --ink-2:#c6cad2; --muted:#9298a3; --line:#2c3038; --line-soft:#23262d;
+  --blue:#5c9dff; --blue-text:#8ab4ff; --indigo:#9b99f7;
+  --ok:#49d18a; --ok-bg:#12291e; --warn:#f0b429; --warn-bg:#2c2312; --gray:#9298a3; --gray-bg:#23262d;
+  --grad:linear-gradient(135deg,#2a7cf0,#7d7bea);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:400 16px/1.6 var(--f-text);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,svg{display:block;max-width:100%}
+h1,h2,h3{margin:0;font-family:var(--f-display);text-wrap:balance}
+p{margin:0}
+a{color:var(--blue-text);text-decoration:none}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.overline{display:flex;align-items:center;gap:10px;margin:0 0 14px;
+  font:600 12px/1.2 var(--f-text);letter-spacing:.09em;text-transform:uppercase;color:var(--blue-text)}
+.overline i{font-style:normal;font-variant-numeric:tabular-nums}
+.overline::after{content:"";width:44px;height:1px;background:currentColor;opacity:.45}
+
+/* ── обложка ───────────────────────────────────────────── */
+.cover{position:relative;overflow:hidden;color:#fff;background:var(--grad)}
+.cover::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.09) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.09) 1px,transparent 1px);
+  background-size:44px 44px;
+  -webkit-mask-image:linear-gradient(200deg,#000 4%,transparent 64%);mask-image:linear-gradient(200deg,#000 4%,transparent 64%)}
+.cover::after{content:"";position:absolute;right:-24%;bottom:-62%;width:min(900px,92vw);aspect-ratio:1;border-radius:50%;
+  pointer-events:none;background:repeating-radial-gradient(circle,transparent 0 52px,rgba(255,255,255,.16) 52px 53px);
+  -webkit-mask-image:radial-gradient(closest-side,#000 28%,transparent 100%);mask-image:radial-gradient(closest-side,#000 28%,transparent 100%)}
+.cover > .wrap{position:relative;z-index:1;padding-top:clamp(44px,7vw,84px);padding-bottom:clamp(30px,4vw,44px)}
+.cover .overline,.cover .overline i{color:#fff}
+.cover h1{font-size:clamp(32px,6vw,62px);line-height:1.04;font-weight:800;letter-spacing:-.03em;margin-bottom:18px}
+.cover .sub{font-size:clamp(16px,2.2vw,21px);line-height:1.5;color:rgba(255,255,255,.92);max-width:62ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.chip{display:inline-flex;align-items:center;gap:7px;padding:6px 13px;border-radius:99px;
+  font:600 13px/1 var(--f-text);background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.4);color:#fff;white-space:nowrap}
+.chip i{width:7px;height:7px;border-radius:50%;background:#fff;flex:none}
+.kpiband{position:relative;z-index:1;background:var(--paper);border-top:1px solid var(--line-soft)}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.kpi{padding:clamp(18px,2.4vw,26px) clamp(14px,2vw,24px);border-left:1px solid var(--line-soft)}
+.kpi:first-child{border-left:0;padding-left:0}
+.kpi:last-child{padding-right:0}
+.kpi b{display:block;font:800 clamp(30px,4.6vw,46px)/1 var(--f-display);letter-spacing:-.03em;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.kpi span{display:block;margin-top:6px;font:700 14px/1.2 var(--f-display);color:var(--ink)}
+.kpi em{display:block;margin-top:3px;font-style:normal;font-size:12.5px;line-height:1.35;color:var(--muted)}
+
+/* ── навигация ─────────────────────────────────────────── */
+.navbar{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--paper) 88%,transparent);
+  backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px);
+  border-bottom:1px solid var(--line-soft)}
+@supports not (background:color-mix(in srgb,#000 50%,#fff)){.navbar{background:var(--paper)}}
+.navbar .wrap{display:flex;align-items:center;gap:12px;height:56px;overflow-x:auto;scrollbar-width:none}
+.navbar .wrap::-webkit-scrollbar{display:none}
+.navbar b{font:800 14px/1 var(--f-display);letter-spacing:-.01em;white-space:nowrap;padding-right:12px;
+  border-right:1px solid var(--line);color:var(--ink);flex:none}
+.navbar nav{display:flex;gap:6px}
+.navbar nav a{flex:none;padding:7px 13px;border-radius:99px;font:500 13.5px/1 var(--f-text);
+  color:var(--ink-2);white-space:nowrap;border:1px solid transparent}
+.navbar nav a:hover{background:var(--mist);color:var(--ink)}
+.navbar nav a.on{background:var(--sky);border-color:var(--sky-line);color:var(--blue-text);font-weight:600}
+.themebtn{margin-left:auto;flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;
+  border:1px solid var(--line);background:var(--paper);color:var(--ink-2);cursor:pointer}
+.themebtn:hover{color:var(--blue-text);border-color:var(--sky-line)}
+.themebtn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── оглавление ────────────────────────────────────────── */
+.toc{padding-top:clamp(40px,6vw,66px)}
+.toc__grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin-top:22px}
+.toc__card{display:block;padding:20px;border-radius:16px;background:var(--paper);border:1px solid var(--line-soft);
+  box-shadow:var(--shadow);transition:transform .18s ease,border-color .18s ease}
+.toc__card:hover{transform:translateY(-3px);border-color:var(--sky-line)}
+.toc__num{display:block;font:800 13px/1 var(--f-display);color:var(--blue-text);font-variant-numeric:tabular-nums}
+.toc__name{display:block;margin:10px 0 6px;font:700 19px/1.25 var(--f-display);letter-spacing:-.015em;color:var(--ink)}
+.toc__sum{display:block;font-size:13.5px;color:var(--ink-2)}
+.toc__st{display:block;margin-top:8px;padding-top:8px;border-top:1px solid var(--line-soft);font-size:12.5px;color:var(--muted)}
+
+/* ── секции и карточки ─────────────────────────────────── */
+main{padding-bottom:clamp(60px,9vw,110px)}
+.brand{padding-top:clamp(44px,7vw,80px);scroll-margin-top:72px}
+.brand__head{padding-bottom:18px;margin-bottom:22px;border-bottom:1px solid var(--line)}
+.brand__head h2{font-size:clamp(26px,4.2vw,40px);line-height:1.08;font-weight:800;letter-spacing:-.028em}
+.brand__sum{margin-top:10px;font-size:14.5px;color:var(--muted)}
+.item{background:var(--paper);border:1px solid var(--line-soft);border-radius:18px;
+  padding:clamp(18px,2.6vw,30px);margin-bottom:16px;box-shadow:var(--shadow)}
+.item__head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.item__num{flex:none;display:grid;place-items:center;min-width:44px;height:28px;padding:0 9px;border-radius:8px;
+  background:var(--sky);border:1px solid var(--sky-line);color:var(--blue-text);
+  font:700 13px/1 var(--f-text);font-variant-numeric:tabular-nums}
+.item__head h3{font-size:clamp(19px,2.4vw,24px);line-height:1.22;font-weight:700;letter-spacing:-.018em}
+.badge{margin-left:auto;display:inline-flex;align-items:center;gap:7px;padding:5px 11px;border-radius:99px;
+  font:600 12.5px/1 var(--f-text);white-space:nowrap;border:1px solid transparent}
+.badge i{width:7px;height:7px;border-radius:50%;background:currentColor;flex:none}
+.badge.ok{background:var(--ok-bg);color:var(--ok);border-color:color-mix(in srgb,var(--ok) 26%,transparent)}
+.badge.warn{background:var(--warn-bg);color:var(--warn);border-color:color-mix(in srgb,var(--warn) 30%,transparent)}
+.badge.gray{background:var(--gray-bg);color:var(--gray);border-color:var(--line)}
+.lead{font-size:clamp(16px,1.5vw,17.5px);line-height:1.55;color:var(--ink-2);max-width:74ch;text-wrap:pretty}
+.details{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:8px;max-width:80ch}
+.details li{position:relative;padding-left:26px;font-size:15px;line-height:1.5;color:var(--ink-2)}
+.details li::before{content:"";position:absolute;left:6px;top:.62em;width:7px;height:7px;border-radius:2px;
+  background:var(--grad)}
+.item__meta:not(:empty){margin-top:16px}
+.src{display:inline-flex;align-items:center;gap:8px;max-width:100%;padding:7px 12px;border-radius:10px;
+  background:var(--mist);border:1px solid var(--line-soft);font-size:13px;color:var(--blue-text)}
+.src .ic{width:15px;height:15px;flex:none}
+.src span{overflow-wrap:anywhere}
+.src:hover{border-color:var(--sky-line);background:var(--sky)}
+.note{margin-top:16px;padding:13px 15px;border-radius:0 12px 12px 0;border-left:3px solid var(--warn);
+  background:var(--warn-bg);font-size:14.5px;line-height:1.5;color:var(--ink)}
+.note b{font-weight:700}
+.placeholder{margin-top:20px;display:flex;align-items:center;gap:14px;padding:22px;border-radius:14px;
+  border:1px dashed var(--line);background:var(--mist);color:var(--muted)}
+.placeholder .ic{width:26px;height:26px;flex:none;color:var(--blue-text)}
+.placeholder b{display:block;font:700 15px/1.3 var(--f-display);color:var(--ink)}
+.placeholder span{display:block;margin-top:4px;font-size:13.5px}
+.placeholder code{font-size:12.5px;background:var(--paper);border:1px solid var(--line-soft);border-radius:5px;padding:1px 5px}
+
+/* ── сетка кадров ──────────────────────────────────────── */
+.shots{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:18px;margin-top:22px;align-items:start}
+.shot{margin:0;grid-column:span 6}
+.shot.k-mobile,.shot.k-phone{grid-column:span 3}
+.shot__media{position:relative}
+.shot__btn{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in;border-radius:12px}
+.shot__btn img{width:100%;height:auto;border-radius:12px;border:1px solid var(--line);background:#fff}
+.shot.f-phone .shot__btn{padding:8px;border-radius:26px;background:var(--mist);border:1px solid var(--line);
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--ink) 6%,transparent)}
+.shot.f-phone .shot__btn img{border-radius:18px;border-color:var(--line-soft)}
+.shot.is-long .shot__btn img{-webkit-mask-image:linear-gradient(#000 74%,transparent);mask-image:linear-gradient(#000 74%,transparent)}
+.shot__btn:hover img{border-color:var(--blue)}
+.shot__btn:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.shot__zoom,.shot__dl{position:absolute;top:10px;display:grid;place-items:center;width:32px;height:32px;
+  border-radius:50%;background:color-mix(in srgb,var(--paper) 86%,transparent);border:1px solid var(--line);
+  color:var(--ink-2);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  opacity:0;transition:opacity .16s ease}
+.shot__zoom{right:48px;pointer-events:none}
+.shot__dl{right:10px;z-index:2}
+.shot__dl:hover{color:var(--blue-text);border-color:var(--blue)}
+.shot__zoom svg,.shot__dl svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.shot__media:hover .shot__zoom,.shot__media:hover .shot__dl,.shot__dl:focus-visible{opacity:1}
+@media (hover:none){.shot__zoom,.shot__dl{opacity:1}}
+.shot.f-phone .shot__zoom,.shot.f-phone .shot__dl{top:18px}
+.shot.f-phone .shot__zoom{right:56px}.shot.f-phone .shot__dl{right:18px}
+.shot__flag{position:absolute;left:10px;bottom:10px;padding:4px 9px;border-radius:99px;
+  background:color-mix(in srgb,var(--paper) 88%,transparent);border:1px solid var(--line);
+  font:600 11.5px/1 var(--f-text);color:var(--muted)}
+figcaption{margin-top:10px;font-size:13px;line-height:1.45}
+figcaption b{display:block;font-weight:600;color:var(--ink)}
+figcaption span{display:block;margin-top:2px;color:var(--muted);font-size:12px}
+@media (max-width:900px){
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .kpi:nth-child(3){border-left:0;padding-left:0}
+  .kpi:nth-child(2){padding-right:0}
+  .kpi:nth-child(3),.kpi:nth-child(4){border-top:1px solid var(--line-soft)}
+  .shot{grid-column:span 12}
+  .shot.k-mobile,.shot.k-phone{grid-column:span 6}
+}
+@media (max-width:560px){
+  .navbar .wrap{height:52px}
+  .badge{margin-left:0}
+  .shots{gap:14px}
+  .shot.k-mobile,.shot.k-phone{grid-column:span 6}
+}
+
+/* ── лайтбокс ──────────────────────────────────────────── */
+.lb{position:fixed;inset:0;z-index:100;display:none;background:rgba(10,11,14,.9);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.lb.on{display:grid;grid-template-rows:auto 1fr auto}
+.lb__bar{display:flex;align-items:center;gap:10px;padding:12px clamp(12px,3vw,22px);color:#fff;
+  border-bottom:1px solid rgba(255,255,255,.12)}
+.lb__count{font:600 13px/1 var(--f-text);font-variant-numeric:tabular-nums;padding:7px 11px;border-radius:99px;
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);white-space:nowrap}
+.lb__tag{font-size:12.5px;color:rgba(255,255,255,.72);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lb__act{margin-left:auto;display:flex;gap:8px;flex:none}
+.lb__act a,.lb__act button{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 14px;border-radius:99px;
+  border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.1);color:#fff;
+  font:600 13px/1 var(--f-text);cursor:pointer}
+.lb__act a:hover,.lb__act button:hover{background:rgba(255,255,255,.22)}
+.lb__act svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.lb__stage{position:relative;overflow:auto;overscroll-behavior:contain;padding:clamp(12px,2.5vw,26px);
+  -webkit-overflow-scrolling:touch}
+.lb__stage img{margin:0 auto;border-radius:10px;background:#fff;box-shadow:0 30px 80px -30px rgba(0,0,0,.9);
+  width:auto;max-width:min(100%,1100px)}
+.lb__stage img.fit{max-height:calc(100vh - 190px);width:auto}
+.lb__nav{position:fixed;top:50%;transform:translateY(-50%);z-index:2;display:grid;place-items:center;
+  width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.3);
+  background:rgba(20,21,26,.72);color:#fff;cursor:pointer;backdrop-filter:blur(8px)}
+.lb__nav:hover{background:rgba(60,62,72,.9)}
+.lb__nav[hidden]{display:none}
+.lb__nav.prev{left:clamp(8px,2vw,22px)}.lb__nav.next{right:clamp(8px,2vw,22px)}
+.lb__nav svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.lb__foot{padding:12px clamp(12px,3vw,22px) 18px;color:#fff;border-top:1px solid rgba(255,255,255,.12);
+  text-align:center}
+.lb__cap{font:600 15px/1.4 var(--f-display)}
+.lb__hint{margin-top:5px;font-size:12px;color:rgba(255,255,255,.6)}
+body.lb-open{overflow:hidden}
+@media (max-width:560px){
+  .lb__nav{width:40px;height:40px;top:auto;bottom:86px;transform:none}
+  .lb__act a span,.lb__act button span{display:none}
+  .lb__act a,.lb__act button{padding:0 11px}
+  .lb__hint{display:none}
+}
+/* ── мягкое появление блоков (включает только JS: без него контент виден сразу) ── */
+html.js-anim .reveal{opacity:0;transform:translateY(14px)}
+html.js-anim .reveal.in{opacity:1;transform:translateY(0);
+  transition:opacity .46s cubic-bezier(.22,.61,.36,1),transform .46s cubic-bezier(.22,.61,.36,1)}
+html.js-anim .toc__card.in:hover{transform:translateY(-3px)}
+@media (prefers-reduced-motion:reduce){
+  html.js-anim .reveal,html.js-anim .reveal.in{opacity:1;transform:none;transition:none}
+}
+@media print{.navbar,.lb,.shot__dl,.shot__zoom,.themebtn{display:none!important}
+  .item{break-inside:avoid;box-shadow:none}}
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <div class="wrap">
+    <p class="overline"><i>Сентябрь 2026</i> Отчёт агентства</p>
+    <h1>Итоги сентября 2026</h1>
+    <p class="sub">Что выкатили по проектам: описание доработок и скрины с прода — десктоп, мобилка, приложение.</p>
+    <div class="chips"><span class="chip ok"><i></i>Выкачено на прод: 15</span><span class="chip gray"><i></i>Скрины от дизайнеров: 3</span><span class="chip warn"><i></i>В тесте: 1</span><span class="chip warn"><i></i>Частично на проде: 1</span><span class="chip"><i></i>Кадров: 63</span></div>
+  </div>
+  <div class="kpiband"><div class="wrap"><div class="kpis"><div class="kpi"><b>6</b><span>проектов</span><em>бренды в работе</em></div><div class="kpi"><b>20</b><span>доработок</span><em>фич и релизов за месяц</em></div><div class="kpi"><b>15</b><span>на проде</span><em>уже доступно пользователям</em></div><div class="kpi"><b>63</b><span>кадра</span><em>скриншоты с прода и макеты</em></div></div></div></div>
+</header>
+
+<div class="navbar">
+  <div class="wrap">
+    <b>Итоги сентября</b>
+    <nav><a href="#b0" data-nav="b0">PopovichFit</a><a href="#b1" data-nav="b1">MedveDiva</a><a href="#b2" data-nav="b2">KochFit</a><a href="#b3" data-nav="b3">Kinezio Fitness</a><a href="#b4" data-nav="b4">Bi13</a><a href="#b5" data-nav="b5">Система Ясности</a></nav>
+    <button class="themebtn" type="button" title="Светлая / тёмная тема" aria-label="Переключить тему">
+      <svg viewBox="0 0 24 24"><path d="M20 13.5A8 8 0 1 1 10.5 4a6.5 6.5 0 0 0 9.5 9.5z"/></svg>
+    </button>
+  </div>
+</div>
+
+<section class="toc wrap">
+  <p class="overline"><i>00</i> Что внутри</p>
+  <h2 style="font-size:clamp(24px,3.4vw,34px);font-weight:800;letter-spacing:-.025em">Проекты и доработки</h2>
+  <div class="toc__grid"><a class="toc__card" href="#b0">
+  <span class="toc__num">01</span>
+  <span class="toc__name">PopovichFit</span>
+  <span class="toc__sum">5 доработок · 14 кадров</span>
+  <span class="toc__st">выкачено на прод: 4 · в тесте: 1</span>
+</a><a class="toc__card" href="#b1">
+  <span class="toc__num">02</span>
+  <span class="toc__name">MedveDiva</span>
+  <span class="toc__sum">3 доработки · 8 кадров</span>
+  <span class="toc__st">выкачено на прод: 1 · частично на проде: 1 · скрины от дизайнеров: 1</span>
+</a><a class="toc__card" href="#b2">
+  <span class="toc__num">03</span>
+  <span class="toc__name">KochFit</span>
+  <span class="toc__sum">4 доработки · 15 кадров</span>
+  <span class="toc__st">выкачено на прод: 3 · скрины от дизайнеров: 1</span>
+</a><a class="toc__card" href="#b3">
+  <span class="toc__num">04</span>
+  <span class="toc__name">Kinezio Fitness</span>
+  <span class="toc__sum">4 доработки · 13 кадров</span>
+  <span class="toc__st">выкачено на прод: 3 · скрины от дизайнеров: 1</span>
+</a><a class="toc__card" href="#b4">
+  <span class="toc__num">05</span>
+  <span class="toc__name">Bi13</span>
+  <span class="toc__sum">3 доработки · 9 кадров</span>
+  <span class="toc__st">выкачено на прод: 3</span>
+</a><a class="toc__card" href="#b5">
+  <span class="toc__num">06</span>
+  <span class="toc__name">Система Ясности</span>
+  <span class="toc__sum">1 доработка · 4 кадра</span>
+  <span class="toc__st">выкачено на прод: 1</span>
+</a></div>
+</section>
+
+<main class="wrap"><section id="b0" class="brand">
+  <header class="brand__head">
+    <span class="overline"><i>01</i> Проект</span>
+    <h2>PopovichFit</h2>
+    <p class="brand__sum">5 доработок · выкачено на прод: 4 · в тесте: 1</p>
+  </header>
+  <article class="item">
+  <header class="item__head">
+    <span class="item__num">1.1</span>
+    <h3>Геймификация, 1 этап</h3>
+    <span class="badge warn"><i></i>В тесте</span>
+  </header>
+  <p class="lead">Новый дизайн личного кабинета с игровой механикой: цели тренировки, отслеживание активности, чат общения и лента активности. Первый этап живёт в приложении.</p>
+  <ul class="details"><li>Выставление целей тренировки — пользователь сам задаёт, сколько занимается на неделе</li><li>Отслеживание активности: прогресс курса и дневная отметка на главном экране</li><li>Чат общения участниц</li><li>Лента активности</li></ul>
+  <div class="item__meta"><a class="src" href="https://lk.popovichfit.ru/products/89" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="ic"><path d="M10 7H6.5A2.5 2.5 0 0 0 4 9.5v8A2.5 2.5 0 0 0 6.5 20h8a2.5 2.5 0 0 0 2.5-2.5V14"/><path d="M14 4h6v6M20 4l-9 9"/></svg><span>https://lk.popovichfit.ru/products/89</span></a></div>
+  <p class="note"><b>Примечание.</b> Тест назначен на 29.09 — в приложении на проде (v2.1.3) целей, ленты и чата ещё нет. Показываем текущее приложение и макеты от дизайнеров: прогресс, план тренировок, чат с тренером.</p>
+  <div class="shots" data-gallery><figure class="shot k-desktop f-plain"><div class="shot__media"><button class="shot__btn" type="button" data-i="0" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="1040" height="569" src="thumbs/popovichfit__lk__lk-01-dashboard--desktop.jpg" alt="ЛК, десктоп: прогресс курса, доступ, реферальная механика" data-large="large/popovichfit__lk__lk-01-dashboard--desktop.jpg" data-full="png/popovichfit/lk/lk-01-dashboard--desktop.png" data-dl="popovichfit-1-1-lk-desktop-progress-kursa-dostup-referalnaya-mehanik.png" data-cap="ЛК, десктоп: прогресс курса, доступ, реферальная механика" data-tag="Десктоп"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/popovichfit/lk/lk-01-dashboard--desktop.jpg" download="popovichfit-1-1-lk-desktop-progress-kursa-dostup-referalnaya-mehanik.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>ЛК, десктоп: прогресс курса, доступ, реферальная механика</b><span>Десктоп</span></figcaption></figure><figure class="shot k-mobile f-phone"><div class="shot__media"><button class="shot__btn" type="button" data-i="1" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="560" height="1064" src="thumbs/popovichfit__lk__lk-01-dashboard--mobile.jpg" alt="ЛК, мобилка" data-large="large/popovichfit__lk__lk-01-dashboard--mobile.jpg" data-full="png/popovichfit/lk/lk-01-dashboard--mobile.png" data-dl="popovichfit-1-1-lk-mobilka.png" data-cap="ЛК, мобилка" data-tag="Мобильная версия"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/popovichfit/lk/lk-01-dashboard--mobile.jpg" download="popovichfit-1-1-lk-mobilka.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>ЛК, мобилка</b><span>Мобильная версия</span></figcaption></figure><figure class="shot k-phone f-phone"><div class="shot__media"><button class="shot__btn" type="button" data-i="2" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="560" height="1213" src="thumbs/popovichfit__app__pf-app-01-home.jpg" alt="Приложение: главная с прогрессом и отметкой дня" data-large="large/popovichfit__app__pf-app-01-home.jpg" data-full="png/popovichfit/app/pf-app-01-home.png" data-dl="popovichfit-1-1-prilozhenie-glavnaya-s-progressom-i-otmetkoy-dnya.png" data-cap="Приложение: главная с прогрессом и отметкой дня" data-tag="Приложение"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/popovichfit/app/pf-app-01-home.jpg" download="popovichfit-1-1-prilozhenie-glavnaya-s-progressom-i-otmetkoy-dnya.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>Приложение: главная с прогрессом и отметкой дня</b><span>Приложение</span></figcaption></figure><figure class="shot k-phone f-phone"><div class="shot__media"><button class="shot__btn" type="button" data-i="3" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="560" height="1213" src="thumbs/popovichfit__app__pf-app-04-tab3.jpg" alt="Приложение: тренировки по неделям" data-large="large/popovichfit__app__pf-app-04-tab3.jpg" data-full="png/popovichfit/app/pf-app-04-tab3.png" data-dl="popovichfit-1-1-prilozhenie-trenirovki-po-nedelyam.png" data-cap="Приложение: тренировки по неделям" data-tag="Приложение"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/popovichfit/app/pf-app-04-tab3.jpg" download="popovichfit-1-1-prilozhenie-trenirovki-po-nedelyam.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>Приложение: тренировки по неделям</b><span>Приложение</span></figcaption></figure></div>
+</article><article class="item">
+  <header class="item__head">
+    <span class="item__num">1.2</span>
+    <h3>Автоматизация подписок</h3>
+    <span class="badge ok"><i></i>Выкачено на прод</span>
+  </header>
+  <p class="lead">Пользователь управляет подпиской сам, без обращения в поддержку. В шапке ЛК — статус подписки, по клику раскрывается вся механика списаний.</p>
+  <ul class="details"><li>Статус подписки виден всегда, прямо в шапке ЛК</li><li>«Поток за потоком» — следующий поток продлевается автоматически</li><li>«Оплата перед стартом» — за 5 дней до нового потока списываем с привязанной карты</li><li>«Заранее напомним» — за сутки до списания письмо на email</li><li>«Всё под твоим контролем» — отключить можно в любой момент, оплаченный поток остаётся доступен до конца</li></ul>
+  <div class="item__meta"><a class="src" href="https://lk.popovichfit.ru/products/89" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="ic"><path d="M10 7H6.5A2.5 2.5 0 0 0 4 9.5v8A2.5 2.5 0 0 0 6.5 20h8a2.5 2.5 0 0 0 2.5-2.5V14"/><path d="M14 4h6v6M20 4l-9 9"/></svg><span>https://lk.popovichfit.ru/products/89</span></a></div>
+  <p class="note"><b>Примечание.</b> На тестовом аккаунте подписка не подключена, поэтому в кадре состояние «не подключена» и оффер. Экраны с активной подпиской (дата следующего списания, смена карты, отмена) снимем на аккаунте с оплатой.</p>
+  <div class="shots" data-gallery><figure class="shot k-desktop f-plain"><div class="shot__media"><button class="shot__btn" type="button" data-i="0" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="1040" height="569" src="thumbs/popovichfit__lk__lk-05-subscription-panel--desktop.jpg" alt="Панель подписки, десктоп: как работает подписка" data-large="large/popovichfit__lk__lk-05-subscription-panel--desktop.jpg" data-full="png/popovichfit/lk/lk-05-subscription-panel--desktop.png" data-dl="popovichfit-1-2-panel-podpiski-desktop-kak-rabotaet-podpiska.png" data-cap="Панель подписки, десктоп: как работает подписка" data-tag="Десктоп"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/popovichfit/lk/lk-05-subscription-panel--desktop.jpg" download="popovichfit-1-2-panel-podpiski-desktop-kak-rabotaet-podpiska.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>Панель подписки, десктоп: как работает подписка</b><span>Десктоп</span></figcaption></figure><figure class="shot k-mobile f-phone"><div class="shot__media"><button class="shot__btn" type="button" data-i="1" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="560" height="1064" src="thumbs/popovichfit__lk__lk-05-subscription-panel--mobile.jpg" alt="Панель подписки, мобилка" data-large="large/popovichfit__lk__lk-05-subscription-panel--mobile.jpg" data-full="png/popovichfit/lk/lk-05-subscription-panel--mobile.png" data-dl="popovichfit-1-2-panel-podpiski-mobilka.png" data-cap="Панель подписки, мобилка" data-tag="Мобильная версия"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/popovichfit/lk/lk-05-subscription-panel--mobile.jpg" download="popovichfit-1-2-panel-podpiski-mobilka.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>Панель подписки, мобилка</b><span>Мобильная версия</span></figcaption></figure></div>
+</article><article class="item">
+  <header class="item__head">
+    <span class="item__num">1.3</span>
+    <h3>Редизайн мобильной версии сайта</h3>
+    <span class="badge ok"><i></i>Выкачено на прод</span>
+  </header>
+  <p class="lead">Путь к покупке сокращён с четырёх шагов до двух. Десктоп готов вместе с мобилкой.</p>
+  <ul class="details"><li>Было 4 шага до оплаты, стало 2</li><li>Страница предзаписи и страницы курсов переработаны под мобильный экран</li><li>Тарифы и кнопка покупки подняты выше по странице</li></ul>
+  <div class="item__meta"><a class="src" href="https://popovichfit.ru/pred" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="ic"><path d="M10 7H6.5A2.5 2.5 0 0 0 4 9.5v8A2.5 2.5 0 0 0 6.5 20h8a2.5 2.5 0 0 0 2.5-2.5V14"/><path d="M14 4h6v6M20 4l-9 9"/></svg><span>https://popovichfit.ru/pred</span></a></div>
+  
+  <div class="shots" data-gallery><figure class="shot k-mobile f-plain is-long"><div class="shot__media"><button class="shot__btn" type="button" data-i="0" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="560" height="1064" src="thumbs/popovichfit__site__pf-10-pred--mobile.jpg" alt="Предзапись, мобилка" data-large="large/popovichfit__site__pf-10-pred--mobile.jpg" data-full="png/popovichfit/site/pf-10-pred--mobile.png" data-dl="popovichfit-1-3-predzapis-mobilka.png" data-cap="Предзапись, мобилка" data-tag="Мобильная версия · вся страница"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/popovichfit/site/pf-10-pred--mobile.jpg" download="popovichfit-1-3-predzapis-mobilka.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a><span class="shot__flag">вся страница</span></div><figcaption><b>Предзапись, мобилка</b><span>Мобильная версия · вся страница</span></figcaption></figure><figure class="shot k-desktop f-plain is-long"><div class="shot__media"><button class="shot__btn" type="button" data-i="1" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="1040" height="1248" src="thumbs/popovichfit__site__pf-10-pred--desktop.jpg" alt="Предзапись, десктоп" data-large="large/popovichfit__site__pf-10-pred--desktop.jpg" data-full="png/popovichfit/site/pf-10-pred--desktop.png" data-dl="popovichfit-1-3-predzapis-desktop.png" data-cap="Предзапись, десктоп" data-tag="Десктоп · вся страница"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/popovichfit/site/pf-10-pred--desktop.jpg" download="popovichfit-1-3-predzapis-desktop.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a><span class="shot__flag">вся страница</span></div><figcaption><b>Предзапись, десктоп</b><span>Десктоп · вся страница</span></figcaption></figure><figure class="shot k-mobile f-plain is-long"><div class="shot__media"><button class="shot__btn" type="button" data-i="2" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="560" height="1064" src="thumbs/popovichfit__site__pf-02-course-power--mobile.jpg" alt="Курс «Силовой», мобилка" data-large="large/popovichfit__site__pf-02-course-power--mobile.jpg" data-full="png/popovichfit/site/pf-02-course-power--mobile.png" data-dl="popovichfit-1-3-kurs-silovoy-mobilka.png" data-cap="Курс «Силовой», мобилка" data-tag="Мобильная версия · вся страница"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/popovichfit/site/pf-02-course-power--mobile.jpg" download="popovichfit-1-3-kurs-silovoy-mobilka.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a><span class="shot__flag">вся страница</span></div><figcaption><b>Курс «Силовой», мобилка</b><span>Мобильная версия · вся страница</span></figcaption></figure><figure class="shot k-mobile f-plain is-long"><div class="shot__media"><button class="shot__btn" type="button" data-i="3" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="560" height="1064" src="thumbs/popovichfit__site__pf-03-course-correction--mobile.jpg" alt="Курс «Коррекция», мобилка" data-large="large/popovichfit__site__pf-03-course-correction--mobile.jpg" data-full="png/popovichfit/site/pf-03-course-correction--mobile.png" data-dl="popovichfit-1-3-kurs-korrekciya-mobilka.png" data-cap="Курс «Коррекция», мобилка" data-tag="Мобильная версия · вся страница"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/popovichfit/site/pf-03-course-correction--mobile.jpg" download="popovichfit-1-3-kurs-korrekciya-mobilka.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a><span class="shot__flag">вся страница</span></div><figcaption><b>Курс «Коррекция», мобилка</b><span>Мобильная версия · вся страница</span></figcaption></figure></div>
+</article><article class="item">
+  <header class="item__head">
+    <span class="item__num">1.4</span>
+    <h3>Онбординг для новых, 1 этап</h3>
+    <span class="badge ok"><i></i>Выкачено на прод</span>
+  </header>
+  <p class="lead">Перед стартом курса пользователь обязан посмотреть вводное видео — иначе легко потерять половину пользы курса на старте.</p>
+  <ul class="details"><li>Видео помечено тегом «Обязательно к просмотру»</li><li>Таймкоды внутри видео: варианты доступа, длительность курса, где заниматься</li><li>Текстовая инструкция рядом с видео</li><li>В следующем потоке к блоку добавим чек-лист</li></ul>
+  <div class="item__meta"><a class="src" href="https://lk.popovichfit.ru/products/89/instructions" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="ic"><path d="M10 7H6.5A2.5 2.5 0 0 0 4 9.5v8A2.5 2.5 0 0 0 6.5 20h8a2.5 2.5 0 0 0 2.5-2.5V14"/><path d="M14 4h6v6M20 4l-9 9"/></svg><span>https://lk.popovichfit.ru/products/89/instructions</span></a></div>
+  
+  <div class="shots" data-gallery><figure class="shot k-desktop f-plain"><div class="shot__media"><button class="shot__btn" type="button" data-i="0" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="1040" height="569" src="thumbs/popovichfit__lk__lk-06-onboarding-video--desktop.jpg" alt="Инструкция к курсу, десктоп: вводное видео с таймкодами" data-large="large/popovichfit__lk__lk-06-onboarding-video--desktop.jpg" data-full="png/popovichfit/lk/lk-06-onboarding-video--desktop.png" data-dl="popovichfit-1-4-instrukciya-k-kursu-desktop-vvodnoe-video-s-taymkoda.png" data-cap="Инструкция к курсу, десктоп: вводное видео с таймкодами" data-tag="Десктоп"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/popovichfit/lk/lk-06-onboarding-video--desktop.jpg" download="popovichfit-1-4-instrukciya-k-kursu-desktop-vvodnoe-video-s-taymkoda.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>Инструкция к курсу, десктоп: вводное видео с таймкодами</b><span>Десктоп</span></figcaption></figure><figure class="shot k-mobile f-phone"><div class="shot__media"><button class="shot__btn" type="button" data-i="1" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="560" height="1064" src="thumbs/popovichfit__lk__lk-06-onboarding-video--mobile.jpg" alt="Инструкция к курсу, мобилка" data-large="large/popovichfit__lk__lk-06-onboarding-video--mobile.jpg" data-full="png/popovichfit/lk/lk-06-onboarding-video--mobile.png" data-dl="popovichfit-1-4-instrukciya-k-kursu-mobilka.png" data-cap="Инструкция к курсу, мобилка" data-tag="Мобильная версия"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/popovichfit/lk/lk-06-onboarding-video--mobile.jpg" download="popovichfit-1-4-instrukciya-k-kursu-mobilka.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>Инструкция к курсу, мобилка</b><span>Мобильная версия</span></figcaption></figure></div>
+</article><article class="item">
+  <header class="item__head">
+    <span class="item__num">1.5</span>
+    <h3>Попап и тег «Сколько дней ты с нами»</h3>
+    <span class="badge ok"><i></i>Выкачено на прод</span>
+  </header>
+  <p class="lead">Тег в шапке ЛК считает, сколько дней пользователь на курсе. Дал много репостов в Инстаграме.</p>
+  <ul class="details"><li>Тег виден на каждом экране ЛК — и на десктопе, и на мобилке</li><li>Попап показывается при входе</li><li>На снятом аккаунте — 257 дней на курсе</li></ul>
+  <div class="item__meta"><a class="src" href="https://lk.popovichfit.ru/products/89" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="ic"><path d="M10 7H6.5A2.5 2.5 0 0 0 4 9.5v8A2.5 2.5 0 0 0 6.5 20h8a2.5 2.5 0 0 0 2.5-2.5V14"/><path d="M14 4h6v6M20 4l-9 9"/></svg><span>https://lk.popovichfit.ru/products/89</span></a></div>
+  
+  <div class="shots" data-gallery><figure class="shot k-desktop f-plain"><div class="shot__media"><button class="shot__btn" type="button" data-i="0" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="1040" height="569" src="thumbs/popovichfit__lk__lk-01-dashboard--desktop.jpg" alt="Тег «257 дней на курсе» в шапке, десктоп" data-large="large/popovichfit__lk__lk-01-dashboard--desktop.jpg" data-full="png/popovichfit/lk/lk-01-dashboard--desktop.png" data-dl="popovichfit-1-5-teg-257-dney-na-kurse-v-shapke-desktop.png" data-cap="Тег «257 дней на курсе» в шапке, десктоп" data-tag="Десктоп"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/popovichfit/lk/lk-01-dashboard--desktop.jpg" download="popovichfit-1-5-teg-257-dney-na-kurse-v-shapke-desktop.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>Тег «257 дней на курсе» в шапке, десктоп</b><span>Десктоп</span></figcaption></figure><figure class="shot k-mobile f-phone"><div class="shot__media"><button class="shot__btn" type="button" data-i="1" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="560" height="1064" src="thumbs/popovichfit__lk__lk-01-dashboard--mobile.jpg" alt="Тег в мобильной шапке" data-large="large/popovichfit__lk__lk-01-dashboard--mobile.jpg" data-full="png/popovichfit/lk/lk-01-dashboard--mobile.png" data-dl="popovichfit-1-5-teg-v-mobilnoy-shapke.png" data-cap="Тег в мобильной шапке" data-tag="Мобильная версия"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/popovichfit/lk/lk-01-dashboard--mobile.jpg" download="popovichfit-1-5-teg-v-mobilnoy-shapke.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>Тег в мобильной шапке</b><span>Мобильная версия</span></figcaption></figure></div>
+</article>
+</section><section id="b1" class="brand">
+  <header class="brand__head">
+    <span class="overline"><i>02</i> Проект</span>
+    <h2>MedveDiva</h2>
+    <p class="brand__sum">3 доработки · выкачено на прод: 1 · частично на проде: 1 · скрины от дизайнеров: 1</p>
+  </header>
+  <article class="item">
+  <header class="item__head">
+    <span class="item__num">2.1</span>
+    <h3>ЛК стал удобнее</h3>
+    <span class="badge ok"><i></i>Выкачено на прод</span>
+  </header>
+  <p class="lead">На десктопе появилось постоянное боковое меню, а «тренировка дня» поднята на главный экран — до неё больше не нужно искать путь.</p>
+  <ul class="details"><li>Боковое меню: мои курсы, чаты, уведомления, полезное, приведи друга, избранное, профиль</li><li>Прогресс курса и счётчик бонусов вынесены в меню</li><li>«Тренировка дня» — первым блоком на главной, рядом «подобрать тренировку» и «случайность, которая работает»</li><li>На мобилке боковое меню раскатим к 42 потоку</li></ul>
+  <div class="item__meta"><a class="src" href="https://lk.medvediva.ru/products/152" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="ic"><path d="M10 7H6.5A2.5 2.5 0 0 0 4 9.5v8A2.5 2.5 0 0 0 6.5 20h8a2.5 2.5 0 0 0 2.5-2.5V14"/><path d="M14 4h6v6M20 4l-9 9"/></svg><span>https://lk.medvediva.ru/products/152</span></a></div>
+  
+  <div class="shots" data-gallery><figure class="shot k-desktop f-plain"><div class="shot__media"><button class="shot__btn" type="button" data-i="0" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="1040" height="589" src="thumbs/medvediva__lk__lk-01-dashboard-sidebar--desktop.jpg" alt="Десктоп: боковое меню и тренировка дня" data-large="large/medvediva__lk__lk-01-dashboard-sidebar--desktop.jpg" data-full="png/medvediva/lk/lk-01-dashboard-sidebar--desktop.png" data-dl="medvediva-2-1-desktop-bokovoe-menyu-i-trenirovka-dnya.png" data-cap="Десктоп: боковое меню и тренировка дня" data-tag="Десктоп"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/medvediva/lk/lk-01-dashboard-sidebar--desktop.jpg" download="medvediva-2-1-desktop-bokovoe-menyu-i-trenirovka-dnya.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>Десктоп: боковое меню и тренировка дня</b><span>Десктоп</span></figcaption></figure><figure class="shot k-desktop f-plain"><div class="shot__media"><button class="shot__btn" type="button" data-i="1" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="800" height="556" src="thumbs/medvediva__lk__lk-02-sidebar-useful--desktop.jpg" alt="Раздел «Полезное» из бокового меню" data-large="large/medvediva__lk__lk-02-sidebar-useful--desktop.jpg" data-full="png/medvediva/lk/lk-02-sidebar-useful--desktop.png" data-dl="medvediva-2-1-razdel-poleznoe-iz-bokovogo-menyu.png" data-cap="Раздел «Полезное» из бокового меню" data-tag="Десктоп"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/medvediva/lk/lk-02-sidebar-useful--desktop.jpg" download="medvediva-2-1-razdel-poleznoe-iz-bokovogo-menyu.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>Раздел «Полезное» из бокового меню</b><span>Десктоп</span></figcaption></figure><figure class="shot k-mobile f-phone"><div class="shot__media"><button class="shot__btn" type="button" data-i="2" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="560" height="1064" src="thumbs/medvediva__lk__lk-01-dashboard--mobile.jpg" alt="Мобилка: текущая версия" data-large="large/medvediva__lk__lk-01-dashboard--mobile.jpg" data-full="png/medvediva/lk/lk-01-dashboard--mobile.png" data-dl="medvediva-2-1-mobilka-tekuschaya-versiya.png" data-cap="Мобилка: текущая версия" data-tag="Мобильная версия"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/medvediva/lk/lk-01-dashboard--mobile.jpg" download="medvediva-2-1-mobilka-tekuschaya-versiya.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>Мобилка: текущая версия</b><span>Мобильная версия</span></figcaption></figure></div>
+</article><article class="item">
+  <header class="item__head">
+    <span class="item__num">2.2</span>
+    <h3>Персональные тренировки с куратором</h3>
+    <span class="badge warn"><i></i>Частично на проде</span>
+  </header>
+  <p class="lead">Механика добавлена на тариф «Комфортный». Пока частично в ручном формате, автоматизация — к 42 потоку.</p>
+  <ul class="details"><li>Тариф «Комфортный» с куратором виден в карточке продукта</li><li>Общение с куратором идёт через раздел чатов</li><li>Автоматизация назначения и ведения — к 42 потоку</li></ul>
+  <div class="item__meta"><a class="src" href="https://lk.medvediva.ru/products/152" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="ic"><path d="M10 7H6.5A2.5 2.5 0 0 0 4 9.5v8A2.5 2.5 0 0 0 6.5 20h8a2.5 2.5 0 0 0 2.5-2.5V14"/><path d="M14 4h6v6M20 4l-9 9"/></svg><span>https://lk.medvediva.ru/products/152</span></a></div>
+  <p class="note"><b>Примечание.</b> В ЛК механика ещё не собрана в отдельный экран — интерфейсную часть добираем скринами от дизайнеров.</p>
+  <div class="shots" data-gallery><figure class="shot k-mobile f-phone"><div class="shot__media"><button class="shot__btn" type="button" data-i="0" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="560" height="1064" src="thumbs/medvediva__lk__lk-01-dashboard--mobile.jpg" alt="Тарифы: «Комфортный» с куратором" data-large="large/medvediva__lk__lk-01-dashboard--mobile.jpg" data-full="png/medvediva/lk/lk-01-dashboard--mobile.png" data-dl="medvediva-2-2-tarify-komfortnyy-s-kuratorom.png" data-cap="Тарифы: «Комфортный» с куратором" data-tag="Мобильная версия"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/medvediva/lk/lk-01-dashboard--mobile.jpg" download="medvediva-2-2-tarify-komfortnyy-s-kuratorom.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>Тарифы: «Комфортный» с куратором</b><span>Мобильная версия</span></figcaption></figure><figure class="shot k-desktop f-plain"><div class="shot__media"><button class="shot__btn" type="button" data-i="1" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="800" height="556" src="thumbs/medvediva__lk__lk-03-chats--desktop.jpg" alt="Раздел чатов" data-large="large/medvediva__lk__lk-03-chats--desktop.jpg" data-full="png/medvediva/lk/lk-03-chats--desktop.png" data-dl="medvediva-2-2-razdel-chatov.png" data-cap="Раздел чатов" data-tag="Десктоп"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/medvediva/lk/lk-03-chats--desktop.jpg" download="medvediva-2-2-razdel-chatov.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>Раздел чатов</b><span>Десктоп</span></figcaption></figure></div>
+</article><article class="item">
+  <header class="item__head">
+    <span class="item__num">2.3</span>
+    <h3>Подарочные сертификаты</h3>
+    <span class="badge gray"><i></i>Скрины от дизайнеров</span>
+  </header>
+  <p class="lead">Дизайн готов, выкатка сертификатов — в октябре.</p>
+  <ul class="details"><li>На проде пока нет — в отчёт идут макеты от дизайнеров</li></ul>
+  <div class="item__meta"></div>
+  <p class="note"><b>Примечание.</b> Скрины от дизайнеров. Класть файлы в png/medvediva/mockups/ — подтянутся сюда автоматически.</p>
+  <div class="shots" data-gallery><figure class="shot k-desktop f-plain"><div class="shot__media"><button class="shot__btn" type="button" data-i="0" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="1024" height="800" src="thumbs/medvediva__mockups__mk-01-sertifikat-shag1-chto-darim.jpg" alt="Макет от дизайнеров" data-large="large/medvediva__mockups__mk-01-sertifikat-shag1-chto-darim.jpg" data-full="png/medvediva/mockups/mk-01-sertifikat-shag1-chto-darim.png" data-dl="medvediva-2-3-maket-ot-dizaynerov.png" data-cap="Макет от дизайнеров" data-tag="Десктоп"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/medvediva/mockups/mk-01-sertifikat-shag1-chto-darim.jpg" download="medvediva-2-3-maket-ot-dizaynerov.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>Макет от дизайнеров</b><span>Десктоп</span></figcaption></figure><figure class="shot k-desktop f-plain"><div class="shot__media"><button class="shot__btn" type="button" data-i="1" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="1024" height="762" src="thumbs/medvediva__mockups__mk-02-sertifikat-oplata-desktop.jpg" alt="Макет от дизайнеров" data-large="large/medvediva__mockups__mk-02-sertifikat-oplata-desktop.jpg" data-full="png/medvediva/mockups/mk-02-sertifikat-oplata-desktop.png" data-dl="medvediva-2-3-maket-ot-dizaynerov.png" data-cap="Макет от дизайнеров" data-tag="Десктоп"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/medvediva/mockups/mk-02-sertifikat-oplata-desktop.jpg" download="medvediva-2-3-maket-ot-dizaynerov.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>Макет от дизайнеров</b><span>Десктоп</span></figcaption></figure><figure class="shot k-phone f-phone"><div class="shot__media"><button class="shot__btn" type="button" data-i="2" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="316" height="695" src="thumbs/medvediva__mockups__mk-03-sertifikat-oplata-mobile.jpg" alt="Макет от дизайнеров" data-large="large/medvediva__mockups__mk-03-sertifikat-oplata-mobile.jpg" data-full="png/medvediva/mockups/mk-03-sertifikat-oplata-mobile.png" data-dl="medvediva-2-3-maket-ot-dizaynerov.png" data-cap="Макет от дизайнеров" data-tag="Приложение"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/medvediva/mockups/mk-03-sertifikat-oplata-mobile.jpg" download="medvediva-2-3-maket-ot-dizaynerov.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>Макет от дизайнеров</b><span>Приложение</span></figcaption></figure></div>
+</article>
+</section><section id="b2" class="brand">
+  <header class="brand__head">
+    <span class="overline"><i>03</i> Проект</span>
+    <h2>KochFit</h2>
+    <p class="brand__sum">4 доработки · выкачено на прод: 3 · скрины от дизайнеров: 1</p>
+  </header>
+  <article class="item">
+  <header class="item__head">
+    <span class="item__num">3.1</span>
+    <h3>Масштабный редизайн сайта и личного кабинета</h3>
+    <span class="badge ok"><i></i>Выкачено на прод</span>
+  </header>
+  <p class="lead">Новый ЛК с боковой навигацией и переработанный сайт. Приложение — в процессе.</p>
+  <ul class="details"><li>Боковое меню: мой курс со сроком доступа и прогрессом, чат участниц, доп. материалы, избранное, оборудование, рефералка, спецпредложения</li><li>Блок «Новый личный кабинет» с короткой экскурсией по обновлению</li><li>Тренировки разложены по неделям и главам, вводный раздел помечен как важный</li><li>Персональное приветствие на главной</li></ul>
+  <div class="item__meta"><a class="src" href="https://v2.kochfit.ru/products/10" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="ic"><path d="M10 7H6.5A2.5 2.5 0 0 0 4 9.5v8A2.5 2.5 0 0 0 6.5 20h8a2.5 2.5 0 0 0 2.5-2.5V14"/><path d="M14 4h6v6M20 4l-9 9"/></svg><span>https://v2.kochfit.ru/products/10</span></a></div>
+  
+  <div class="shots" data-gallery><figure class="shot k-desktop f-plain"><div class="shot__media"><button class="shot__btn" type="button" data-i="0" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="800" height="615" src="thumbs/kochfit__lk__lk-01-dashboard--desktop.jpg" alt="ЛК, десктоп: боковое меню и структура курса" data-large="large/kochfit__lk__lk-01-dashboard--desktop.jpg" data-full="png/kochfit/lk/lk-01-dashboard--desktop.png" data-dl="kochfit-3-1-lk-desktop-bokovoe-menyu-i-struktura-kursa.png" data-cap="ЛК, десктоп: боковое меню и структура курса" data-tag="Десктоп"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/kochfit/lk/lk-01-dashboard--desktop.jpg" download="kochfit-3-1-lk-desktop-bokovoe-menyu-i-struktura-kursa.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>ЛК, десктоп: боковое меню и структура курса</b><span>Десктоп</span></figcaption></figure><figure class="shot k-mobile f-phone"><div class="shot__media"><button class="shot__btn" type="button" data-i="1" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="560" height="1064" src="thumbs/kochfit__lk__lk-01-dashboard--mobile.jpg" alt="ЛК, мобилка" data-large="large/kochfit__lk__lk-01-dashboard--mobile.jpg" data-full="png/kochfit/lk/lk-01-dashboard--mobile.png" data-dl="kochfit-3-1-lk-mobilka.png" data-cap="ЛК, мобилка" data-tag="Мобильная версия"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/kochfit/lk/lk-01-dashboard--mobile.jpg" download="kochfit-3-1-lk-mobilka.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>ЛК, мобилка</b><span>Мобильная версия</span></figcaption></figure><figure class="shot k-desktop f-plain is-long"><div class="shot__media"><button class="shot__btn" type="button" data-i="2" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="1040" height="1248" src="thumbs/kochfit__site__kf-10-home--desktop.jpg" alt="Сайт, десктоп" data-large="large/kochfit__site__kf-10-home--desktop.jpg" data-full="png/kochfit/site/kf-10-home--desktop.png" data-dl="kochfit-3-1-sayt-desktop.png" data-cap="Сайт, десктоп" data-tag="Десктоп · вся страница"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/kochfit/site/kf-10-home--desktop.jpg" download="kochfit-3-1-sayt-desktop.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a><span class="shot__flag">вся страница</span></div><figcaption><b>Сайт, десктоп</b><span>Десктоп · вся страница</span></figcaption></figure><figure class="shot k-mobile f-plain is-long"><div class="shot__media"><button class="shot__btn" type="button" data-i="3" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="560" height="1064" src="thumbs/kochfit__site__kf-10-home--mobile.jpg" alt="Сайт, мобилка" data-large="large/kochfit__site__kf-10-home--mobile.jpg" data-full="png/kochfit/site/kf-10-home--mobile.png" data-dl="kochfit-3-1-sayt-mobilka.png" data-cap="Сайт, мобилка" data-tag="Мобильная версия · вся страница"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/kochfit/site/kf-10-home--mobile.jpg" download="kochfit-3-1-sayt-mobilka.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a><span class="shot__flag">вся страница</span></div><figcaption><b>Сайт, мобилка</b><span>Мобильная версия · вся страница</span></figcaption></figure></div>
+</article><article class="item">
+  <header class="item__head">
+    <span class="item__num">3.2</span>
+    <h3>Сайт перенесён с Тильды</h3>
+    <span class="badge ok"><i></i>Выкачено на прод</span>
+  </header>
+  <p class="lead">Сайт съехал с Тильды на собственный стек. Пять основных страниц — в десктопе и мобилке.</p>
+  <ul class="details"><li>Главная</li><li>Красота и здоровье</li><li>Мышцы тазового дна</li><li>Активная беременность</li><li>Персональная работа</li></ul>
+  <div class="item__meta"><a class="src" href="https://kochfit.ru/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="ic"><path d="M10 7H6.5A2.5 2.5 0 0 0 4 9.5v8A2.5 2.5 0 0 0 6.5 20h8a2.5 2.5 0 0 0 2.5-2.5V14"/><path d="M14 4h6v6M20 4l-9 9"/></svg><span>https://kochfit.ru/</span></a></div>
+  
+  <div class="shots" data-gallery><figure class="shot k-desktop f-plain is-long"><div class="shot__media"><button class="shot__btn" type="button" data-i="0" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="1040" height="1248" src="thumbs/kochfit__site__kf-10-home--desktop.jpg" alt="Главная, десктоп" data-large="large/kochfit__site__kf-10-home--desktop.jpg" data-full="png/kochfit/site/kf-10-home--desktop.png" data-dl="kochfit-3-2-glavnaya-desktop.png" data-cap="Главная, десктоп" data-tag="Десктоп · вся страница"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/kochfit/site/kf-10-home--desktop.jpg" download="kochfit-3-2-glavnaya-desktop.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a><span class="shot__flag">вся страница</span></div><figcaption><b>Главная, десктоп</b><span>Десктоп · вся страница</span></figcaption></figure><figure class="shot k-desktop f-plain is-long"><div class="shot__media"><button class="shot__btn" type="button" data-i="1" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="1040" height="1248" src="thumbs/kochfit__site__kf-11-community--desktop.jpg" alt="Красота и здоровье" data-large="large/kochfit__site__kf-11-community--desktop.jpg" data-full="png/kochfit/site/kf-11-community--desktop.png" data-dl="kochfit-3-2-krasota-i-zdorove.png" data-cap="Красота и здоровье" data-tag="Десктоп · вся страница"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/kochfit/site/kf-11-community--desktop.jpg" download="kochfit-3-2-krasota-i-zdorove.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a><span class="shot__flag">вся страница</span></div><figcaption><b>Красота и здоровье</b><span>Десктоп · вся страница</span></figcaption></figure><figure class="shot k-desktop f-plain is-long"><div class="shot__media"><button class="shot__btn" type="button" data-i="2" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="1040" height="1248" src="thumbs/kochfit__site__kf-12-e_mtd--desktop.jpg" alt="Мышцы тазового дна" data-large="large/kochfit__site__kf-12-e_mtd--desktop.jpg" data-full="png/kochfit/site/kf-12-e_mtd--desktop.png" data-dl="kochfit-3-2-myshcy-tazovogo-dna.png" data-cap="Мышцы тазового дна" data-tag="Десктоп · вся страница"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/kochfit/site/kf-12-e_mtd--desktop.jpg" download="kochfit-3-2-myshcy-tazovogo-dna.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a><span class="shot__flag">вся страница</span></div><figcaption><b>Мышцы тазового дна</b><span>Десктоп · вся страница</span></figcaption></figure><figure class="shot k-desktop f-plain is-long"><div class="shot__media"><button class="shot__btn" type="button" data-i="3" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="1040" height="1248" src="thumbs/kochfit__site__kf-13-for_pregnant--desktop.jpg" alt="Активная беременность" data-large="large/kochfit__site__kf-13-for_pregnant--desktop.jpg" data-full="png/kochfit/site/kf-13-for_pregnant--desktop.png" data-dl="kochfit-3-2-aktivnaya-beremennost.png" data-cap="Активная беременность" data-tag="Десктоп · вся страница"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/kochfit/site/kf-13-for_pregnant--desktop.jpg" download="kochfit-3-2-aktivnaya-beremennost.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a><span class="shot__flag">вся страница</span></div><figcaption><b>Активная беременность</b><span>Десктоп · вся страница</span></figcaption></figure></div>
+</article><article class="item">
+  <header class="item__head">
+    <span class="item__num">3.3</span>
+    <h3>Подписка с первого касания</h3>
+    <span class="badge gray"><i></i>Скрины от дизайнеров</span>
+  </header>
+  <p class="lead">Покупка подписки прямо с первого экрана, без промежуточных шагов.</p>
+  <ul class="details"><li>На проде сейчас скрыто — показываем дизайн</li></ul>
+  <div class="item__meta"></div>
+  <p class="note"><b>Примечание.</b> Скрины от дизайнеров. Класть в png/kochfit/mockups/ — подтянутся сюда автоматически.</p>
+  <div class="shots" data-gallery><figure class="shot k-desktop f-plain"><div class="shot__media"><button class="shot__btn" type="button" data-i="0" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="586" height="703" src="thumbs/kochfit__mockups__mk-02-podpiska-s-pervogo-kasaniya.jpg" alt="Макет от дизайнеров" data-large="large/kochfit__mockups__mk-02-podpiska-s-pervogo-kasaniya.jpg" data-full="png/kochfit/mockups/mk-02-podpiska-s-pervogo-kasaniya.png" data-dl="kochfit-3-3-maket-ot-dizaynerov.png" data-cap="Макет от дизайнеров" data-tag="Десктоп"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/kochfit/mockups/mk-02-podpiska-s-pervogo-kasaniya.jpg" download="kochfit-3-3-maket-ot-dizaynerov.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>Макет от дизайнеров</b><span>Десктоп</span></figcaption></figure><figure class="shot k-desktop f-plain"><div class="shot__media"><button class="shot__btn" type="button" data-i="1" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="1024" height="626" src="thumbs/kochfit__mockups__mk-03-novye-tarify-iyul.jpg" alt="Макет от дизайнеров" data-large="large/kochfit__mockups__mk-03-novye-tarify-iyul.jpg" data-full="png/kochfit/mockups/mk-03-novye-tarify-iyul.png" data-dl="kochfit-3-3-maket-ot-dizaynerov.png" data-cap="Макет от дизайнеров" data-tag="Десктоп"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/kochfit/mockups/mk-03-novye-tarify-iyul.jpg" download="kochfit-3-3-maket-ot-dizaynerov.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>Макет от дизайнеров</b><span>Десктоп</span></figcaption></figure><figure class="shot k-desktop f-plain"><div class="shot__media"><button class="shot__btn" type="button" data-i="2" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="586" height="703" src="thumbs/kochfit__mockups__mk-04-tarif-premium-podpiska.jpg" alt="Макет от дизайнеров" data-large="large/kochfit__mockups__mk-04-tarif-premium-podpiska.jpg" data-full="png/kochfit/mockups/mk-04-tarif-premium-podpiska.png" data-dl="kochfit-3-3-maket-ot-dizaynerov.png" data-cap="Макет от дизайнеров" data-tag="Десктоп"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/kochfit/mockups/mk-04-tarif-premium-podpiska.jpg" download="kochfit-3-3-maket-ot-dizaynerov.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>Макет от дизайнеров</b><span>Десктоп</span></figcaption></figure></div>
+</article><article class="item">
+  <header class="item__head">
+    <span class="item__num">3.4</span>
+    <h3>Офлайн-просмотр в приложении</h3>
+    <span class="badge ok"><i></i>Выкачено на прод</span>
+  </header>
+  <p class="lead">Тренировки скачиваются в приложение и смотрятся без интернета.</p>
+  <ul class="details"><li>Вкладка «Загрузки» рядом с «Избранным»</li><li>Видно дату скачивания и длительность</li><li>Поиск по загрузкам и кнопка «Очистить всё»</li></ul>
+  <div class="item__meta"></div>
+  <p class="note"><b>Примечание.</b> Снято на реальном устройстве (Android). Кадры с iPhone добавим отдельно.</p>
+  <div class="shots" data-gallery><figure class="shot k-phone f-phone"><div class="shot__media"><button class="shot__btn" type="button" data-i="0" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="560" height="1213" src="thumbs/kochfit__app__kf-app-07-offline-downloads.jpg" alt="Вкладка «Загрузки»: тренировка скачана 10 сентября" data-large="large/kochfit__app__kf-app-07-offline-downloads.jpg" data-full="png/kochfit/app/kf-app-07-offline-downloads.png" data-dl="kochfit-3-4-vkladka-zagruzki-trenirovka-skachana-10-sentyabrya.png" data-cap="Вкладка «Загрузки»: тренировка скачана 10 сентября" data-tag="Приложение"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/kochfit/app/kf-app-07-offline-downloads.jpg" download="kochfit-3-4-vkladka-zagruzki-trenirovka-skachana-10-sentyabrya.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>Вкладка «Загрузки»: тренировка скачана 10 сентября</b><span>Приложение</span></figcaption></figure><figure class="shot k-phone f-phone"><div class="shot__media"><button class="shot__btn" type="button" data-i="1" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="560" height="1213" src="thumbs/kochfit__app__kf-app-01-home.jpg" alt="Главная приложения" data-large="large/kochfit__app__kf-app-01-home.jpg" data-full="png/kochfit/app/kf-app-01-home.png" data-dl="kochfit-3-4-glavnaya-prilozheniya.png" data-cap="Главная приложения" data-tag="Приложение"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/kochfit/app/kf-app-01-home.jpg" download="kochfit-3-4-glavnaya-prilozheniya.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>Главная приложения</b><span>Приложение</span></figcaption></figure><figure class="shot k-phone f-phone"><div class="shot__media"><button class="shot__btn" type="button" data-i="2" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="560" height="1213" src="thumbs/kochfit__app__kf-app-04-tab3.jpg" alt="Расписание по неделям и главам" data-large="large/kochfit__app__kf-app-04-tab3.jpg" data-full="png/kochfit/app/kf-app-04-tab3.png" data-dl="kochfit-3-4-raspisanie-po-nedelyam-i-glavam.png" data-cap="Расписание по неделям и главам" data-tag="Приложение"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/kochfit/app/kf-app-04-tab3.jpg" download="kochfit-3-4-raspisanie-po-nedelyam-i-glavam.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>Расписание по неделям и главам</b><span>Приложение</span></figcaption></figure><figure class="shot k-phone f-phone"><div class="shot__media"><button class="shot__btn" type="button" data-i="3" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="560" height="1213" src="thumbs/kochfit__app__kf-app-06-tab5.jpg" alt="Профиль: мои курсы" data-large="large/kochfit__app__kf-app-06-tab5.jpg" data-full="png/kochfit/app/kf-app-06-tab5.png" data-dl="kochfit-3-4-profil-moi-kursy.png" data-cap="Профиль: мои курсы" data-tag="Приложение"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/kochfit/app/kf-app-06-tab5.jpg" download="kochfit-3-4-profil-moi-kursy.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>Профиль: мои курсы</b><span>Приложение</span></figcaption></figure></div>
+</article>
+</section><section id="b3" class="brand">
+  <header class="brand__head">
+    <span class="overline"><i>04</i> Проект</span>
+    <h2>Kinezio Fitness</h2>
+    <p class="brand__sum">4 доработки · выкачено на прод: 3 · скрины от дизайнеров: 1</p>
+  </header>
+  <article class="item">
+  <header class="item__head">
+    <span class="item__num">4.1</span>
+    <h3>Переезд на платформу</h3>
+    <span class="badge ok"><i></i>Выкачено на прод</span>
+  </header>
+  <p class="lead">Сайт и личный кабинет переехали на платформу, ЛК брендирован под Kinezio.</p>
+  <ul class="details"><li>Курс разложен по модулям с вкладками</li><li>Прогресс и срок доступа с кнопкой продления</li><li>Сертификат по завершении курса</li><li>Нижняя навигация: курсы, обучение, избранное</li></ul>
+  <div class="item__meta"><a class="src" href="https://lk.kineziofitness.online/products/211" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="ic"><path d="M10 7H6.5A2.5 2.5 0 0 0 4 9.5v8A2.5 2.5 0 0 0 6.5 20h8a2.5 2.5 0 0 0 2.5-2.5V14"/><path d="M14 4h6v6M20 4l-9 9"/></svg><span>https://lk.kineziofitness.online/products/211</span></a></div>
+  
+  <div class="shots" data-gallery><figure class="shot k-desktop f-plain"><div class="shot__media"><button class="shot__btn" type="button" data-i="0" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="1040" height="589" src="thumbs/kinezio__lk__lk-01-course-modules--desktop.jpg" alt="ЛК «Мышечное тестирование», десктоп" data-large="large/kinezio__lk__lk-01-course-modules--desktop.jpg" data-full="png/kinezio/lk/lk-01-course-modules--desktop.png" data-dl="kinezio-4-1-lk-myshechnoe-testirovanie-desktop.png" data-cap="ЛК «Мышечное тестирование», десктоп" data-tag="Десктоп"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/kinezio/lk/lk-01-course-modules--desktop.jpg" download="kinezio-4-1-lk-myshechnoe-testirovanie-desktop.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>ЛК «Мышечное тестирование», десктоп</b><span>Десктоп</span></figcaption></figure><figure class="shot k-mobile f-phone"><div class="shot__media"><button class="shot__btn" type="button" data-i="1" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="560" height="1064" src="thumbs/kinezio__lk__lk-01-course-modules--mobile.jpg" alt="ЛК, мобилка" data-large="large/kinezio__lk__lk-01-course-modules--mobile.jpg" data-full="png/kinezio/lk/lk-01-course-modules--mobile.png" data-dl="kinezio-4-1-lk-mobilka.png" data-cap="ЛК, мобилка" data-tag="Мобильная версия"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/kinezio/lk/lk-01-course-modules--mobile.jpg" download="kinezio-4-1-lk-mobilka.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>ЛК, мобилка</b><span>Мобильная версия</span></figcaption></figure><figure class="shot k-desktop f-plain is-long"><div class="shot__media"><button class="shot__btn" type="button" data-i="2" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="1040" height="1248" src="thumbs/kinezio__site__kz-01-home--desktop.jpg" alt="Сайт, десктоп" data-large="large/kinezio__site__kz-01-home--desktop.jpg" data-full="png/kinezio/site/kz-01-home--desktop.png" data-dl="kinezio-4-1-sayt-desktop.png" data-cap="Сайт, десктоп" data-tag="Десктоп · вся страница"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/kinezio/site/kz-01-home--desktop.jpg" download="kinezio-4-1-sayt-desktop.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a><span class="shot__flag">вся страница</span></div><figcaption><b>Сайт, десктоп</b><span>Десктоп · вся страница</span></figcaption></figure><figure class="shot k-mobile f-plain is-long"><div class="shot__media"><button class="shot__btn" type="button" data-i="3" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="560" height="1064" src="thumbs/kinezio__site__kz-01-home--mobile.jpg" alt="Сайт, мобилка" data-large="large/kinezio__site__kz-01-home--mobile.jpg" data-full="png/kinezio/site/kz-01-home--mobile.png" data-dl="kinezio-4-1-sayt-mobilka.png" data-cap="Сайт, мобилка" data-tag="Мобильная версия · вся страница"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/kinezio/site/kz-01-home--mobile.jpg" download="kinezio-4-1-sayt-mobilka.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a><span class="shot__flag">вся страница</span></div><figcaption><b>Сайт, мобилка</b><span>Мобильная версия · вся страница</span></figcaption></figure></div>
+</article><article class="item">
+  <header class="item__head">
+    <span class="item__num">4.2</span>
+    <h3>Новый продукт «Энциклопедия тренера»</h3>
+    <span class="badge ok"><i></i>Выкачено на прод</span>
+  </header>
+  <p class="lead">Запуск с нуля: отдельный продукт со своей страницей.</p>
+  <ul class="details"><li>Своя посадочная страница на сайте</li><li>Продукт подключается к тому же ЛК</li></ul>
+  <div class="item__meta"><a class="src" href="https://kineziofitness.online/coach-encyclopedia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="ic"><path d="M10 7H6.5A2.5 2.5 0 0 0 4 9.5v8A2.5 2.5 0 0 0 6.5 20h8a2.5 2.5 0 0 0 2.5-2.5V14"/><path d="M14 4h6v6M20 4l-9 9"/></svg><span>https://kineziofitness.online/coach-encyclopedia</span></a></div>
+  
+  <div class="shots" data-gallery><figure class="shot k-desktop f-plain is-long"><div class="shot__media"><button class="shot__btn" type="button" data-i="0" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="1040" height="1248" src="thumbs/kinezio__site__kz-10-coach-encyclopedia--desktop.jpg" alt="Страница продукта, десктоп" data-large="large/kinezio__site__kz-10-coach-encyclopedia--desktop.jpg" data-full="png/kinezio/site/kz-10-coach-encyclopedia--desktop.png" data-dl="kinezio-4-2-stranica-produkta-desktop.png" data-cap="Страница продукта, десктоп" data-tag="Десктоп · вся страница"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/kinezio/site/kz-10-coach-encyclopedia--desktop.jpg" download="kinezio-4-2-stranica-produkta-desktop.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a><span class="shot__flag">вся страница</span></div><figcaption><b>Страница продукта, десктоп</b><span>Десктоп · вся страница</span></figcaption></figure><figure class="shot k-mobile f-plain is-long"><div class="shot__media"><button class="shot__btn" type="button" data-i="1" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="560" height="1064" src="thumbs/kinezio__site__kz-10-coach-encyclopedia--mobile.jpg" alt="Страница продукта, мобилка" data-large="large/kinezio__site__kz-10-coach-encyclopedia--mobile.jpg" data-full="png/kinezio/site/kz-10-coach-encyclopedia--mobile.png" data-dl="kinezio-4-2-stranica-produkta-mobilka.png" data-cap="Страница продукта, мобилка" data-tag="Мобильная версия · вся страница"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/kinezio/site/kz-10-coach-encyclopedia--mobile.jpg" download="kinezio-4-2-stranica-produkta-mobilka.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a><span class="shot__flag">вся страница</span></div><figcaption><b>Страница продукта, мобилка</b><span>Мобильная версия · вся страница</span></figcaption></figure></div>
+</article><article class="item">
+  <header class="item__head">
+    <span class="item__num">4.3</span>
+    <h3>Кастомизация ЛК ФД</h3>
+    <span class="badge ok"><i></i>Выкачено на прод</span>
+  </header>
+  <p class="lead">С нуля собрана новая структура образовательного курса «Фундамент движения».</p>
+  <ul class="details"><li>Словарь кинезиолога и важные термины отдельным блоком</li><li>Модули: Анатомия, МФР, ММТ, Заключение — с числом тем и заданий</li><li>Прогресс по каждому модулю отдельно</li><li>Кнопки «Задания» и «Доп. материалы» в шапке курса</li></ul>
+  <div class="item__meta"><a class="src" href="https://lk.kineziofitness.online/products/225" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="ic"><path d="M10 7H6.5A2.5 2.5 0 0 0 4 9.5v8A2.5 2.5 0 0 0 6.5 20h8a2.5 2.5 0 0 0 2.5-2.5V14"/><path d="M14 4h6v6M20 4l-9 9"/></svg><span>https://lk.kineziofitness.online/products/225</span></a></div>
+  
+  <div class="shots" data-gallery><figure class="shot k-desktop f-plain"><div class="shot__media"><button class="shot__btn" type="button" data-i="0" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="1040" height="589" src="thumbs/kinezio__lk__lk-02-fd-225-structure--desktop.jpg" alt="Структура курса ФД, десктоп" data-large="large/kinezio__lk__lk-02-fd-225-structure--desktop.jpg" data-full="png/kinezio/lk/lk-02-fd-225-structure--desktop.png" data-dl="kinezio-4-3-struktura-kursa-fd-desktop.png" data-cap="Структура курса ФД, десктоп" data-tag="Десктоп"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/kinezio/lk/lk-02-fd-225-structure--desktop.jpg" download="kinezio-4-3-struktura-kursa-fd-desktop.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>Структура курса ФД, десктоп</b><span>Десктоп</span></figcaption></figure><figure class="shot k-mobile f-phone"><div class="shot__media"><button class="shot__btn" type="button" data-i="1" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="560" height="1064" src="thumbs/kinezio__lk__lk-02-fd-225-structure--mobile.jpg" alt="Структура курса ФД, мобилка" data-large="large/kinezio__lk__lk-02-fd-225-structure--mobile.jpg" data-full="png/kinezio/lk/lk-02-fd-225-structure--mobile.png" data-dl="kinezio-4-3-struktura-kursa-fd-mobilka.png" data-cap="Структура курса ФД, мобилка" data-tag="Мобильная версия"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/kinezio/lk/lk-02-fd-225-structure--mobile.jpg" download="kinezio-4-3-struktura-kursa-fd-mobilka.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>Структура курса ФД, мобилка</b><span>Мобильная версия</span></figcaption></figure></div>
+</article><article class="item">
+  <header class="item__head">
+    <span class="item__num">4.4</span>
+    <h3>Разработка приложения</h3>
+    <span class="badge gray"><i></i>Скрины от дизайнеров</span>
+  </header>
+  <p class="lead">В сентябре дизайн, выкатка в октябре.</p>
+  <ul class="details"><li>На проде пока нет — в отчёт идут макеты от дизайнеров</li></ul>
+  <div class="item__meta"></div>
+  <p class="note"><b>Примечание.</b> Скрины от дизайнеров. Класть в png/kinezio/mockups/ — подтянутся сюда автоматически.</p>
+  <div class="shots" data-gallery><figure class="shot k-phone f-phone"><div class="shot__media"><button class="shot__btn" type="button" data-i="0" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="271" height="596" src="thumbs/kinezio__mockups__mk-01-app-glavnaya-moduli.jpg" alt="Макет от дизайнеров" data-large="large/kinezio__mockups__mk-01-app-glavnaya-moduli.jpg" data-full="png/kinezio/mockups/mk-01-app-glavnaya-moduli.png" data-dl="kinezio-4-4-maket-ot-dizaynerov.png" data-cap="Макет от дизайнеров" data-tag="Приложение"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/kinezio/mockups/mk-01-app-glavnaya-moduli.jpg" download="kinezio-4-4-maket-ot-dizaynerov.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>Макет от дизайнеров</b><span>Приложение</span></figcaption></figure><figure class="shot k-phone f-phone"><div class="shot__media"><button class="shot__btn" type="button" data-i="1" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="390" height="858" src="thumbs/kinezio__mockups__mk-02-app-profil.jpg" alt="Макет от дизайнеров" data-large="large/kinezio__mockups__mk-02-app-profil.jpg" data-full="png/kinezio/mockups/mk-02-app-profil.png" data-dl="kinezio-4-4-maket-ot-dizaynerov.png" data-cap="Макет от дизайнеров" data-tag="Приложение"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/kinezio/mockups/mk-02-app-profil.jpg" download="kinezio-4-4-maket-ot-dizaynerov.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>Макет от дизайнеров</b><span>Приложение</span></figcaption></figure><figure class="shot k-phone f-phone"><div class="shot__media"><button class="shot__btn" type="button" data-i="2" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="390" height="788" src="thumbs/kinezio__mockups__mk-03-app-domashnie-zadaniya.jpg" alt="Макет от дизайнеров" data-large="large/kinezio__mockups__mk-03-app-domashnie-zadaniya.jpg" data-full="png/kinezio/mockups/mk-03-app-domashnie-zadaniya.png" data-dl="kinezio-4-4-maket-ot-dizaynerov.png" data-cap="Макет от дизайнеров" data-tag="Приложение"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/kinezio/mockups/mk-03-app-domashnie-zadaniya.jpg" download="kinezio-4-4-maket-ot-dizaynerov.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>Макет от дизайнеров</b><span>Приложение</span></figcaption></figure><figure class="shot k-phone f-phone"><div class="shot__media"><button class="shot__btn" type="button" data-i="3" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="390" height="788" src="thumbs/kinezio__mockups__mk-04-app-uvedomleniya.jpg" alt="Макет от дизайнеров" data-large="large/kinezio__mockups__mk-04-app-uvedomleniya.jpg" data-full="png/kinezio/mockups/mk-04-app-uvedomleniya.png" data-dl="kinezio-4-4-maket-ot-dizaynerov.png" data-cap="Макет от дизайнеров" data-tag="Приложение"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/kinezio/mockups/mk-04-app-uvedomleniya.jpg" download="kinezio-4-4-maket-ot-dizaynerov.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>Макет от дизайнеров</b><span>Приложение</span></figcaption></figure><figure class="shot k-phone f-phone"><div class="shot__media"><button class="shot__btn" type="button" data-i="4" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="271" height="596" src="thumbs/kinezio__mockups__mk-05-app-glavnaya-blizhayshie-aktivnosti.jpg" alt="Макет от дизайнеров" data-large="large/kinezio__mockups__mk-05-app-glavnaya-blizhayshie-aktivnosti.jpg" data-full="png/kinezio/mockups/mk-05-app-glavnaya-blizhayshie-aktivnosti.png" data-dl="kinezio-4-4-maket-ot-dizaynerov.png" data-cap="Макет от дизайнеров" data-tag="Приложение"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/kinezio/mockups/mk-05-app-glavnaya-blizhayshie-aktivnosti.jpg" download="kinezio-4-4-maket-ot-dizaynerov.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>Макет от дизайнеров</b><span>Приложение</span></figcaption></figure></div>
+</article>
+</section><section id="b4" class="brand">
+  <header class="brand__head">
+    <span class="overline"><i>05</i> Проект</span>
+    <h2>Bi13</h2>
+    <p class="brand__sum">3 доработки · выкачено на прод: 3</p>
+  </header>
+  <article class="item">
+  <header class="item__head">
+    <span class="item__num">5.1</span>
+    <h3>Переезд на платформу с кастомизацией ЛК</h3>
+    <span class="badge ok"><i></i>Выкачено на прод</span>
+  </header>
+  <p class="lead">ЛК собран в фирменной тёмной теме Bi13, а не в дефолтной платформенной.</p>
+  <ul class="details"><li>Карточка курса с обложкой-коллажем и тарифом</li><li>Расписание курса, чат курса, реферальная программа — тремя кнопками в шапке</li><li>Прогресс и срок доступа</li><li>Раздел «Дополнения»: приложения для обработки, аккаунты для вдохновения, стикеры и шрифты, подложки для сторис, гайды</li><li>Раздел «Лекции»</li></ul>
+  <div class="item__meta"><a class="src" href="https://lk.bi13pro.ru/products/2" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="ic"><path d="M10 7H6.5A2.5 2.5 0 0 0 4 9.5v8A2.5 2.5 0 0 0 6.5 20h8a2.5 2.5 0 0 0 2.5-2.5V14"/><path d="M14 4h6v6M20 4l-9 9"/></svg><span>https://lk.bi13pro.ru/products/2</span></a></div>
+  
+  <div class="shots" data-gallery><figure class="shot k-desktop f-plain"><div class="shot__media"><button class="shot__btn" type="button" data-i="0" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="1040" height="589" src="thumbs/bi13__lk__lk-01-dashboard--desktop.jpg" alt="ЛК, десктоп" data-large="large/bi13__lk__lk-01-dashboard--desktop.jpg" data-full="png/bi13/lk/lk-01-dashboard--desktop.png" data-dl="bi13-5-1-lk-desktop.png" data-cap="ЛК, десктоп" data-tag="Десктоп"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/bi13/lk/lk-01-dashboard--desktop.jpg" download="bi13-5-1-lk-desktop.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>ЛК, десктоп</b><span>Десктоп</span></figcaption></figure><figure class="shot k-mobile f-phone"><div class="shot__media"><button class="shot__btn" type="button" data-i="1" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="560" height="1064" src="thumbs/bi13__lk__lk-01-dashboard--mobile.jpg" alt="ЛК, мобилка" data-large="large/bi13__lk__lk-01-dashboard--mobile.jpg" data-full="png/bi13/lk/lk-01-dashboard--mobile.png" data-dl="bi13-5-1-lk-mobilka.png" data-cap="ЛК, мобилка" data-tag="Мобильная версия"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/bi13/lk/lk-01-dashboard--mobile.jpg" download="bi13-5-1-lk-mobilka.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>ЛК, мобилка</b><span>Мобильная версия</span></figcaption></figure></div>
+</article><article class="item">
+  <header class="item__head">
+    <span class="item__num">5.2</span>
+    <h3>Новый дизайн сайта</h3>
+    <span class="badge ok"><i></i>Выкачено на прод</span>
+  </header>
+  <p class="lead">Сайт переделан в фирменной графике: чёрный фон, бордовые акценты, крупная типографика.</p>
+  <ul class="details"><li>Главная и страницы продуктов</li><li>Страница объединённого курса мобильной съёмки</li><li>Адаптив под мобильный</li></ul>
+  <div class="item__meta"><a class="src" href="https://bi13pro.ru/aesthetic-high-level" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="ic"><path d="M10 7H6.5A2.5 2.5 0 0 0 4 9.5v8A2.5 2.5 0 0 0 6.5 20h8a2.5 2.5 0 0 0 2.5-2.5V14"/><path d="M14 4h6v6M20 4l-9 9"/></svg><span>https://bi13pro.ru/aesthetic-high-level</span></a></div>
+  
+  <div class="shots" data-gallery><figure class="shot k-desktop f-plain is-long"><div class="shot__media"><button class="shot__btn" type="button" data-i="0" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="1040" height="1248" src="thumbs/bi13__site__bi-10-aesthetic-high-level--desktop.jpg" alt="Курс мобильной съёмки, десктоп" data-large="large/bi13__site__bi-10-aesthetic-high-level--desktop.jpg" data-full="png/bi13/site/bi-10-aesthetic-high-level--desktop.png" data-dl="bi13-5-2-kurs-mobilnoy-semki-desktop.png" data-cap="Курс мобильной съёмки, десктоп" data-tag="Десктоп · вся страница"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/bi13/site/bi-10-aesthetic-high-level--desktop.jpg" download="bi13-5-2-kurs-mobilnoy-semki-desktop.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a><span class="shot__flag">вся страница</span></div><figcaption><b>Курс мобильной съёмки, десктоп</b><span>Десктоп · вся страница</span></figcaption></figure><figure class="shot k-mobile f-plain is-long"><div class="shot__media"><button class="shot__btn" type="button" data-i="1" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="560" height="1064" src="thumbs/bi13__site__bi-10-aesthetic-high-level--mobile.jpg" alt="Курс мобильной съёмки, мобилка" data-large="large/bi13__site__bi-10-aesthetic-high-level--mobile.jpg" data-full="png/bi13/site/bi-10-aesthetic-high-level--mobile.png" data-dl="bi13-5-2-kurs-mobilnoy-semki-mobilka.png" data-cap="Курс мобильной съёмки, мобилка" data-tag="Мобильная версия · вся страница"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/bi13/site/bi-10-aesthetic-high-level--mobile.jpg" download="bi13-5-2-kurs-mobilnoy-semki-mobilka.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a><span class="shot__flag">вся страница</span></div><figcaption><b>Курс мобильной съёмки, мобилка</b><span>Мобильная версия · вся страница</span></figcaption></figure><figure class="shot k-desktop f-plain"><div class="shot__media"><button class="shot__btn" type="button" data-i="2" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="1040" height="1248" src="thumbs/bi13__site__bi-01-home--desktop.jpg" alt="Главная, десктоп" data-large="large/bi13__site__bi-01-home--desktop.jpg" data-full="png/bi13/site/bi-01-home--desktop.png" data-dl="bi13-5-2-glavnaya-desktop.png" data-cap="Главная, десктоп" data-tag="Десктоп"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/bi13/site/bi-01-home--desktop.jpg" download="bi13-5-2-glavnaya-desktop.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>Главная, десктоп</b><span>Десктоп</span></figcaption></figure><figure class="shot k-mobile f-plain is-long"><div class="shot__media"><button class="shot__btn" type="button" data-i="3" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="560" height="1064" src="thumbs/bi13__site__bi-01-home--mobile.jpg" alt="Главная, мобилка" data-large="large/bi13__site__bi-01-home--mobile.jpg" data-full="png/bi13/site/bi-01-home--mobile.png" data-dl="bi13-5-2-glavnaya-mobilka.png" data-cap="Главная, мобилка" data-tag="Мобильная версия · вся страница"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/bi13/site/bi-01-home--mobile.jpg" download="bi13-5-2-glavnaya-mobilka.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a><span class="shot__flag">вся страница</span></div><figcaption><b>Главная, мобилка</b><span>Мобильная версия · вся страница</span></figcaption></figure></div>
+</article><article class="item">
+  <header class="item__head">
+    <span class="item__num">5.3</span>
+    <h3>Обновление продуктовой линейки</h3>
+    <span class="badge ok"><i></i>Выкачено на прод</span>
+  </header>
+  <p class="lead">Продукты объединены: AESTHETIC BI13 и HIGH LEVEL продаются связкой, с апсейлом прямо из личного кабинета.</p>
+  <ul class="details"><li>В ЛК блок «Следующий уровень»: HIGH LEVEL или продление AESTHETIC BI13</li><li>Попап «Продолжить обучение» с двумя дорожками: переход на HIGH LEVEL (с обратной связью и без) или продление на 1/2/3 месяца</li><li>На сайте объединённая страница курса</li></ul>
+  <div class="item__meta"><a class="src" href="https://bi13pro.ru/aesthetic-high-level" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="ic"><path d="M10 7H6.5A2.5 2.5 0 0 0 4 9.5v8A2.5 2.5 0 0 0 6.5 20h8a2.5 2.5 0 0 0 2.5-2.5V14"/><path d="M14 4h6v6M20 4l-9 9"/></svg><span>https://bi13pro.ru/aesthetic-high-level</span></a></div>
+  
+  <div class="shots" data-gallery><figure class="shot k-desktop f-plain"><div class="shot__media"><button class="shot__btn" type="button" data-i="0" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="800" height="555" src="thumbs/bi13__lk__lk-02-product-bundle-upsell--desktop.jpg" alt="Попап объединения продуктов, десктоп" data-large="large/bi13__lk__lk-02-product-bundle-upsell--desktop.jpg" data-full="png/bi13/lk/lk-02-product-bundle-upsell--desktop.png" data-dl="bi13-5-3-popap-obedineniya-produktov-desktop.png" data-cap="Попап объединения продуктов, десктоп" data-tag="Десктоп"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/bi13/lk/lk-02-product-bundle-upsell--desktop.jpg" download="bi13-5-3-popap-obedineniya-produktov-desktop.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>Попап объединения продуктов, десктоп</b><span>Десктоп</span></figcaption></figure><figure class="shot k-mobile f-phone"><div class="shot__media"><button class="shot__btn" type="button" data-i="1" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="560" height="1064" src="thumbs/bi13__lk__lk-02-product-bundle-upsell--mobile.jpg" alt="Попап, мобилка" data-large="large/bi13__lk__lk-02-product-bundle-upsell--mobile.jpg" data-full="png/bi13/lk/lk-02-product-bundle-upsell--mobile.png" data-dl="bi13-5-3-popap-mobilka.png" data-cap="Попап, мобилка" data-tag="Мобильная версия"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/bi13/lk/lk-02-product-bundle-upsell--mobile.jpg" download="bi13-5-3-popap-mobilka.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>Попап, мобилка</b><span>Мобильная версия</span></figcaption></figure><figure class="shot k-desktop f-plain is-long"><div class="shot__media"><button class="shot__btn" type="button" data-i="2" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="1040" height="1248" src="thumbs/bi13__site__bi-10-aesthetic-high-level--desktop.jpg" alt="Объединённая страница курса" data-large="large/bi13__site__bi-10-aesthetic-high-level--desktop.jpg" data-full="png/bi13/site/bi-10-aesthetic-high-level--desktop.png" data-dl="bi13-5-3-obedinennaya-stranica-kursa.png" data-cap="Объединённая страница курса" data-tag="Десктоп · вся страница"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/bi13/site/bi-10-aesthetic-high-level--desktop.jpg" download="bi13-5-3-obedinennaya-stranica-kursa.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a><span class="shot__flag">вся страница</span></div><figcaption><b>Объединённая страница курса</b><span>Десктоп · вся страница</span></figcaption></figure></div>
+</article>
+</section><section id="b5" class="brand">
+  <header class="brand__head">
+    <span class="overline"><i>06</i> Проект</span>
+    <h2>Система Ясности</h2>
+    <p class="brand__sum">1 доработка · выкачено на прод: 1</p>
+  </header>
+  <article class="item">
+  <header class="item__head">
+    <span class="item__num">6.1</span>
+    <h3>Новый продукт — аудиоклуб с подпиской</h3>
+    <span class="badge ok"><i></i>Выкачено на прод</span>
+  </header>
+  <p class="lead">Запущен аудиоклуб: подписочный продукт со своей посадочной страницей и оплатой.</p>
+  <ul class="details"><li>Отдельная страница /audio-club в навигации сайта</li><li>Оплата подписки через ЛК</li><li>Мини-курсы и флагманский курс — рядом в линейке</li></ul>
+  <div class="item__meta"><a class="src" href="https://sistemayasnosti.com/audio-club" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="ic"><path d="M10 7H6.5A2.5 2.5 0 0 0 4 9.5v8A2.5 2.5 0 0 0 6.5 20h8a2.5 2.5 0 0 0 2.5-2.5V14"/><path d="M14 4h6v6M20 4l-9 9"/></svg><span>https://sistemayasnosti.com/audio-club</span></a></div>
+  
+  <div class="shots" data-gallery><figure class="shot k-desktop f-plain is-long"><div class="shot__media"><button class="shot__btn" type="button" data-i="0" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="1040" height="1248" src="thumbs/yasnost__site__sy-10-audio-club--desktop.jpg" alt="Аудиоклуб, десктоп" data-large="large/yasnost__site__sy-10-audio-club--desktop.jpg" data-full="png/yasnost/site/sy-10-audio-club--desktop.png" data-dl="yasnost-6-1-audioklub-desktop.png" data-cap="Аудиоклуб, десктоп" data-tag="Десктоп · вся страница"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/yasnost/site/sy-10-audio-club--desktop.jpg" download="yasnost-6-1-audioklub-desktop.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a><span class="shot__flag">вся страница</span></div><figcaption><b>Аудиоклуб, десктоп</b><span>Десктоп · вся страница</span></figcaption></figure><figure class="shot k-mobile f-plain is-long"><div class="shot__media"><button class="shot__btn" type="button" data-i="1" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="560" height="1064" src="thumbs/yasnost__site__sy-10-audio-club--mobile.jpg" alt="Аудиоклуб, мобилка" data-large="large/yasnost__site__sy-10-audio-club--mobile.jpg" data-full="png/yasnost/site/sy-10-audio-club--mobile.png" data-dl="yasnost-6-1-audioklub-mobilka.png" data-cap="Аудиоклуб, мобилка" data-tag="Мобильная версия · вся страница"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/yasnost/site/sy-10-audio-club--mobile.jpg" download="yasnost-6-1-audioklub-mobilka.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a><span class="shot__flag">вся страница</span></div><figcaption><b>Аудиоклуб, мобилка</b><span>Мобильная версия · вся страница</span></figcaption></figure><figure class="shot k-desktop f-plain is-long"><div class="shot__media"><button class="shot__btn" type="button" data-i="2" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="1040" height="1248" src="thumbs/yasnost__site__sy-01-home--desktop.jpg" alt="Главная сайта" data-large="large/yasnost__site__sy-01-home--desktop.jpg" data-full="png/yasnost/site/sy-01-home--desktop.png" data-dl="yasnost-6-1-glavnaya-sayta.png" data-cap="Главная сайта" data-tag="Десктоп · вся страница"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/yasnost/site/sy-01-home--desktop.jpg" download="yasnost-6-1-glavnaya-sayta.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a><span class="shot__flag">вся страница</span></div><figcaption><b>Главная сайта</b><span>Десктоп · вся страница</span></figcaption></figure><figure class="shot k-desktop f-plain"><div class="shot__media"><button class="shot__btn" type="button" data-i="3" aria-label="Открыть кадр во весь экран"><img loading="lazy" decoding="async" width="800" height="556" src="thumbs/yasnost__lk__lk-01-dashboard--desktop.jpg" alt="ЛК потока: вводное видео, тетрадь, чат, чек-листы" data-large="large/yasnost__lk__lk-01-dashboard--desktop.jpg" data-full="png/yasnost/lk/lk-01-dashboard--desktop.png" data-dl="yasnost-6-1-lk-potoka-vvodnoe-video-tetrad-chat-chek-listy.png" data-cap="ЛК потока: вводное видео, тетрадь, чат, чек-листы" data-tag="Десктоп"><span class="shot__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L21 21M11 8v6M8 11h6"/></svg></span></button><a class="shot__dl" href="png/yasnost/lk/lk-01-dashboard--desktop.jpg" download="yasnost-6-1-lk-potoka-vvodnoe-video-tetrad-chat-chek-listy.jpg" title="Скачать оригинал" aria-label="Скачать оригинал кадра"><svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg></a></div><figcaption><b>ЛК потока: вводное видео, тетрадь, чат, чек-листы</b><span>Десктоп</span></figcaption></figure></div>
+</article>
+</section></main>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Просмотр кадра" aria-hidden="true">
+  <div class="lb__bar">
+    <span class="lb__count">1 / 1</span>
+    <span class="lb__tag"></span>
+    <span class="lb__act">
+      <a class="lb__dl" href="#" download>
+        <svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg><span>Скачать</span>
+      </a>
+      <button class="lb__close" type="button" aria-label="Закрыть">
+        <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Закрыть</span>
+      </button>
+    </span>
+  </div>
+  <div class="lb__stage"><img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></div>
+  <button class="lb__nav prev" type="button" aria-label="Предыдущий кадр">
+    <svg viewBox="0 0 24 24"><path d="M14.5 5L7.5 12l7 7"/></svg></button>
+  <button class="lb__nav next" type="button" aria-label="Следующий кадр">
+    <svg viewBox="0 0 24 24"><path d="M9.5 5l7 7-7 7"/></svg></button>
+  <div class="lb__foot">
+    <p class="lb__cap"></p>
+    <p class="lb__hint">← → листать · Esc закрыть · клик по фону закрывает</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  // ── тема: системная, по кнопке переключаем вручную ──
+  var btn=document.querySelector('.themebtn'), r=document.documentElement;
+  try{var s=localStorage.getItem('sh-theme'); if(s) r.setAttribute('data-theme',s);}catch(e){}
+  if(btn) btn.addEventListener('click',function(){
+    var dark=r.getAttribute('data-theme')==='dark'||(!r.getAttribute('data-theme')&&matchMedia('(prefers-color-scheme:dark)').matches);
+    var v=dark?'light':'dark'; r.setAttribute('data-theme',v);
+    try{localStorage.setItem('sh-theme',v);}catch(e){}
+  });
+
+  var reduce=false;
+  try{reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;}catch(e){}
+
+  // ── плавный переход по якорю: своя анимация, 700 мс на любую дистанцию ──
+  var DUR=700, anim=null;
+  function stop(){anim=null;}
+  ['wheel','touchstart','keydown'].forEach(function(t){
+    window.addEventListener(t,function(){anim=null;},{passive:true});
+  });
+  function target(el){
+    var bar=document.querySelector('.navbar');
+    var off=(bar?bar.getBoundingClientRect().height:0)+12;
+    var max=Math.max(0,document.documentElement.scrollHeight-window.innerHeight);
+    return Math.max(0,Math.min(max,el.getBoundingClientRect().top+window.pageYOffset-off));
+  }
+  function goto(hash){
+    var el=document.querySelector(hash);
+    if(!el) return false;
+    try{history.replaceState(null,'',hash);}catch(e){}
+    var y=target(el);
+    if(reduce||!window.requestAnimationFrame){window.scrollTo(0,y);return true;}
+    var from=window.pageYOffset, me={}, t0=null;
+    anim=me;
+    requestAnimationFrame(function step(t){
+      if(anim!==me) return;                       // пользователь вмешался — не мешаем
+      if(t0===null) t0=t;
+      var p=Math.min(1,(t-t0)/DUR);
+      var e=p<.5 ? 4*p*p*p : 1-Math.pow(-2*p+2,3)/2;   // ease-in-out cubic
+      var to=target(el);                          // цель пересчитываем: картинки догружаются
+      window.scrollTo(0,from+(to-from)*e);
+      if(p<1) requestAnimationFrame(step); else stop();
+    });
+    return true;
+  }
+  document.addEventListener('click',function(e){
+    var a=e.target.closest?e.target.closest('a[href^="#"]'):null;
+    if(!a) return;
+    var h=a.getAttribute('href');
+    if(h.length>1&&goto(h)) e.preventDefault();
+  });
+
+  // ── активный пункт навигации ──
+  var links=[].slice.call(document.querySelectorAll('[data-nav]'));
+  var secs=links.map(function(a){return document.getElementById(a.getAttribute('data-nav'));});
+  if(window.IntersectionObserver){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(!e.isIntersecting) return;
+        links.forEach(function(a){a.classList.toggle('on',a.getAttribute('data-nav')===e.target.id);});
+      });
+    },{rootMargin:'-60px 0px -70% 0px'});
+    secs.forEach(function(s){if(s) io.observe(s);});
+  }
+
+  // ── мягкое появление блоков при попадании в вид ──
+  (function(){
+    var groups=[['.toc__grid','.toc__card'],['.brand','.item'],['.shots','.shot']];
+    var all=[];
+    groups.forEach(function(g){
+      [].forEach.call(document.querySelectorAll(g[0]),function(box){
+        [].forEach.call(box.children,function(el,i){
+          if(!el.matches(g[1])) return;
+          el.classList.add('reveal');
+          el.style.transitionDelay=Math.min(i,4)*50+'ms';
+          all.push(el);
+        });
+      });
+    });
+    function showAll(){all.forEach(function(el){el.classList.add('in');});}
+    if(!all.length) return;
+    if(reduce||!window.IntersectionObserver){showAll();return;}
+    r.classList.add('js-anim');
+    var io=new IntersectionObserver(function(es,ob){
+      es.forEach(function(e){
+        if(!e.isIntersecting) return;
+        e.target.classList.add('in');
+        ob.unobserve(e.target);                   // один раз, при обратном скролле не мигает
+      });
+    },{rootMargin:'0px 0px -8% 0px',threshold:.02});
+    all.forEach(function(el){io.observe(el);});
+    // страховка: если наблюдатель по какой-то причине не сработал — показываем всё
+    setTimeout(function(){
+      all.forEach(function(el){
+        if(!el.classList.contains('in')&&el.getBoundingClientRect().top<window.innerHeight*1.5) el.classList.add('in');
+      });
+    },1600);
+    window.addEventListener('load',function(){
+      setTimeout(function(){
+        var left=all.filter(function(el){return !el.classList.contains('in');});
+        if(left.length===all.length) showAll();   // наблюдатель мёртв — показываем без анимации
+      },400);
+    });
+  })();
+
+  // ── лайтбокс ──
+  var lb=document.getElementById('lb'), stage=lb.querySelector('.lb__stage'),
+      img=lb.querySelector('.lb__stage img'), cap=lb.querySelector('.lb__cap'),
+      tag=lb.querySelector('.lb__tag'), cnt=lb.querySelector('.lb__count'),
+      dl=lb.querySelector('.lb__dl'), prev=lb.querySelector('.lb__nav.prev'),
+      next=lb.querySelector('.lb__nav.next');
+  var group=[], idx=0, lastFocus=null;
+  var BLANK='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+
+  function show(i){
+    if(!group.length) return;
+    idx=(i+group.length)%group.length;
+    var el=group[idx];
+    img.classList.remove('fit');
+    img.removeAttribute('width'); img.removeAttribute('height');
+    img.alt=el.getAttribute('data-cap')||'';
+    img.src=el.getAttribute('data-large');
+    cap.textContent=el.getAttribute('data-cap')||'';
+    tag.textContent=el.getAttribute('data-tag')||'';
+    cnt.textContent=(idx+1)+' / '+group.length;
+    dl.href=el.getAttribute('data-full');
+    dl.setAttribute('download',el.getAttribute('data-dl')||'');
+    stage.scrollTop=0;
+    var many=group.length>1;
+    prev.hidden=!many; next.hidden=!many;
+  }
+  img.addEventListener('load',function(){
+    // невысокие кадры вписываем в экран целиком, длинные листаем прокруткой
+    if(img.naturalHeight/img.naturalWidth < 2.2) img.classList.add('fit');
+  });
+  function open(list,i,from){
+    group=list; lastFocus=from||null;
+    lb.classList.add('on'); lb.setAttribute('aria-hidden','false');
+    document.body.classList.add('lb-open');
+    show(i);
+  }
+  function close(){
+    lb.classList.remove('on'); lb.setAttribute('aria-hidden','true');
+    document.body.classList.remove('lb-open');
+    img.src=BLANK;
+    if(lastFocus) try{lastFocus.focus();}catch(e){}
+  }
+  document.addEventListener('click',function(e){
+    var b=e.target.closest ? e.target.closest('.shot__btn') : null;
+    if(!b) return;
+    e.preventDefault();
+    var box=b.closest('[data-gallery]');
+    var list=[].slice.call(box.querySelectorAll('.shot__btn img'));
+    open(list,list.indexOf(b.querySelector('img')),b);
+  });
+  lb.addEventListener('click',function(e){
+    if(e.target===lb||e.target===stage) close();
+  });
+  lb.querySelector('.lb__close').addEventListener('click',close);
+  prev.addEventListener('click',function(){show(idx-1);});
+  next.addEventListener('click',function(){show(idx+1);});
+  document.addEventListener('keydown',function(e){
+    if(!lb.classList.contains('on')) return;
+    if(e.key==='Escape'){close();}
+    else if(e.key==='ArrowLeft'){show(idx-1);}
+    else if(e.key==='ArrowRight'){show(idx+1);}
+    else return;
+    e.preventDefault();
+  });
+  // свайп на телефоне
+  var x0=null;
+  stage.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;},{passive:true});
+  stage.addEventListener('touchend',function(e){
+    if(x0===null) return;
+    var dx=e.changedTouches[0].clientX-x0; x0=null;
+    if(Math.abs(dx)>60) show(idx+(dx<0?1:-1));
+  },{passive:true});
+})();
+</script>
+</body></html>
